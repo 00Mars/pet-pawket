@@ -1,0 +1,84 @@
+/* Outer section background */
+#mission-container {
+    background: linear-gradient(120deg, rgba(255,155,42,0.85), rgba(255,214,96,0.85));
+    backdrop-filter: blur(2px);
+    padding: 4rem 1.5rem;
+  }
+  
+  /* Inner card */
+  .mission-card {
+    background-color: rgba(255, 248, 240, 0.80);
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+  
+  /* Flex container */
+  .mission-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+  
+  /* Text */
+  .mission-text {
+    flex: 1 1 300px;
+    color: #333;
+  }
+  
+  .mission-text h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2b2b2b;
+    margin-bottom: 1rem;
+  }
+  
+  .mission-text p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: #555;
+  }
+  
+  .mission-text p strong {
+    color: #2c2c2c;
+    font-weight: 600;
+  }
+  
+  /* Button */
+  .shop-button {
+    display: inline-block;
+    background-color: rgba(255, 184, 92, 1);
+    color: #fff;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: background 0.3s ease;
+  }
+  
+  .shop-button:hover {
+    background-color: rgba(255, 166, 37, 1);
+  }
+  
+  /* Image */
+  .mission-image {
+    flex: 1 1 300px;
+    max-width: 500px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+  
+  .mission-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+  

@@ -1,0 +1,190 @@
+#navbar-container .sticky-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050;
+  background: transparent;
+}
+
+.announcement-bar {
+  background: linear-gradient(120deg, rgba(0,0,0,0.85), rgba(27,27,27,0.85));
+  backdrop-filter: blur(1px);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1rem;
+  border-top: 2px solid rgba(255,255,255,0.5);
+}
+
+.custom-navbar {
+  background: linear-gradient(120deg, rgba(0,130,179,0.95), rgba(0,198,215,0.95));
+  backdrop-filter: blur(6px);
+  height: 80px;
+  padding-top: 40px;
+  border-top: 2px solid rgba(255,255,255,0.05);
+  border-bottom: 2px solid rgba(0,0,0,0.05);
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+.navbar-container {
+  max-width: 1600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  width: 100%;
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.nav-left { left: 2rem; }
+.nav-center { left: 50%; transform: translate(-50%, -50%); text-align: center; }
+.nav-right {
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.brand-area {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(4px, 1vw, 10px);
+  white-space: nowrap;
+}
+
+.brand-logo {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.5));
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+
+
+.brand-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease;
+}
+
+.charlie-frame-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.charlie-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.2rem, 0.8vw, 3rem);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item a {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.5rem 0;
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background: rgba(255,255,255,0.95);
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px;
+  color: #333;
+}
+
+.icon {
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.cart-count {
+  background: #007acc;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.icon-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-dropdown:hover .icon-dropdown-menu {
+  display: block;
+}
+
+.icon-dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: rgba(255,255,255,0.95);
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.15);
+  z-index: 100;
+}
+
+.icon-dropdown-menu a {
+  display: block;
+  padding: 8px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.icon-dropdown-menu a:hover {
+  background: rgba(0, 130, 179, 0.1);
+}

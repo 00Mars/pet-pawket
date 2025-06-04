@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events | Pet Pawket</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/globals.css" />
+  <link rel="stylesheet" href="/theme.css" />
+  <link rel="stylesheet" href="/footer.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Fredoka', sans-serif;
+      background-image: url('/assets/images/PPBG1.svg');
+      background-repeat: repeat;
+      background-size: 400px 400px;
+      background-attachment: fixed;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(143, 216, 243, 0.8), rgba(137, 245, 255, 0.8));
+      backdrop-filter: blur(2px);
+      z-index: -1;
+      pointer-events: none;
+    }
+    .page-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 120px 20px 80px;
+      min-height: 750px;
+    }
+    .content-wrapper {
+      max-width: 700px;
+      width: 100%;
+      margin-top: 60px;
+      padding: 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    }
+    h1 {
+      font-size: 2.2rem;
+      text-align: center;
+      color: #008ca1;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #444;
+      text-align: center;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div id="navbar-container"></div>
+  <div class="page-container">
+    <div class="content-wrapper">
+      <h1>Events</h1>
+      <p>We host pop-up events, donation drives, meet-ups, and virtual Q&As to bring the Pet Pawket community together. Stay tuned for what’s coming next!</p>
+    </div>
+  </div>
+  <div id="footer-container"></div>
+  <script type="module">
+  import { initBaseUI } from './baseInit.js';
+  initBaseUI();
+</script>
+</body>
+</html>

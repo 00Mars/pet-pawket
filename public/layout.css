@@ -1,0 +1,56 @@
+#heroCarousel {
+  background: linear-gradient(120deg, rgba(255,155,42,0.85), rgba(255,214,96,0.85));
+  backdrop-filter: blur(2px);
+  padding-top: 40px;
+}
+
+.hero-slide-1,
+.hero-slide-2 {
+  height: 75vh;
+}
+
+@keyframes wagAndBounce {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  10% { transform: rotate(8deg) translateY(0); }
+  20% { transform: rotate(-6deg) translateY(0); }
+  30% { transform: rotate(6deg) translateY(0); }
+  50% { transform: translateY(-8px); }
+  70% { transform: translateY(-6px); }
+}
+
+.huey-animate {
+  animation: wagAndBounce 1.5s ease forwards;
+}
+
+.glass-card {
+  max-width: 1600px;
+  min-height: 70vh;
+  background-color: rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.featured-products,
+#featured-products {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(1px);
+  padding: 1.5rem;
+}
+
+#footer-container {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(2px);
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+@keyframes searchPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.7); }
+  100% { transform: scale(1); }
+}
+
+.icon-wrapper.search-pop {
+  animation: searchPop 0.6s ease forwards;
+  will-change: transform;
+}
