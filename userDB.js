@@ -21,6 +21,7 @@ function scaffoldUser(user) {
     shopifyCustomerId: user.shopifyCustomerId || null,
     preferences: parseJSON(user.preferences, { theme: 'light', showActivityFeed: true }),
     wishlist: parseJSON(user.wishlist, []),
+    pets: parseJSON(user.pets, []),
     achievements: parseJSON(user.achievements, []),
     progress: parseJSON(user.progress, { profile: 0, pets: 0, orders: 0 }),
     activityLog: parseJSON(user.activityLog, []),
@@ -70,16 +71,17 @@ export async function updateUser(email, data) {
   const updated = scaffoldUser({ ...existing, ...data });
   await db.run(
     `INSERT OR REPLACE INTO users (
-      id, email, passwordHash, shopifyLinked, wishlist,
-      preferences, achievements, progress,
-      activityLog, hueyMemory, memorials
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      id, email, passwordHash, shopifyLinked,
+      wishlist, pets, preferences, achievements,
+      progress, activityLog, hueyMemory, memorials
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       updated.id,
       updated.email,
       updated.passwordHash || null,
       updated.shopifyLinked ? 1 : 0,
       JSON.stringify(updated.wishlist),
+      JSON.stringify(updated.pets),
       JSON.stringify(updated.preferences),
       JSON.stringify(updated.achievements),
       JSON.stringify(updated.progress),

@@ -1,7 +1,7 @@
 // routes/userRoute.js
 
 import express from 'express';
-import { requireAuth } from '../server.js';
+import { requireAuth } from '../middleware/requireAuth.js';
 import { getUserById } from '../userDB.js';
 
 const router = express.Router();

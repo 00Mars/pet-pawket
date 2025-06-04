@@ -33,32 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // middleware/auth.js
 
-import { verifyToken } from './utils/auth.js'; // or correct path
-export function requireAuth(req, res, next) {
-  const bearerHeader = req.headers['authorization'];
-  const cookieToken = req.cookies?.authToken;
-  const token = cookieToken || (bearerHeader?.startsWith('Bearer ') ? bearerHeader.split(' ')[1] : null);
-
-  console.log('[AUTH] Headers:', req.headers);
-  console.log('[AUTH] Cookie token:', cookieToken);
-  console.log('[AUTH] Authorization header:', bearerHeader);
-  console.log('[AUTH] Selected token:', token);
-
-  if (!token) {
-    console.warn('[AUTH] Missing token');
-    return res.status(401).json({ message: 'Missing token' });
-  }
-
-  try {
-    const payload = verifyToken(token);
-    console.log('[AUTH] Token verified. Payload:', payload);
-    req.user = payload;
-    next();
-  } catch (err) {
-    console.error('[AUTH] JWT verification failed:', err.message);
-    return res.status(403).json({ message: 'Invalid token' });
-  }
-}
+import { requireAuth } from './middleware/requireAuth.js';
 
 
 import signupRoute from './routes/signup-route.js';
@@ -69,7 +44,7 @@ app.use(signupRoute);
 const SHOPIFY_API_ENDPOINT = `https://${process.env.SHOPIFY_DOMAIN}/api/2024-04/graphql.json`;
 
 // Login route
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
   const query = `
@@ -228,7 +203,7 @@ app.get('/api/orders', requireAuth, async (req, res) => {
 });
  
 import journalRoutes from './routes/journalRoutes.js';
-app.use(journalRoutes);
+app.use('/api/profile', journalRoutes);
 
 import profileRoutes from './routes/profile.js';
 app.use('/api/profile', profileRoutes);
