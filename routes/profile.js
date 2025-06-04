@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import multer from 'multer';
 import sharp from 'sharp';
-import { requireAuth } from '../server.js';
+import { requireAuth } from '../middleware/requireAuth.js';
 
 const router = express.Router();
 router.use(requireAuth); // ✅ Apply once globally

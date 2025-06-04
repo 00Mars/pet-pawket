@@ -1,17 +1,27 @@
 import { verifyToken } from '../utils/auth.js';
 
 export function requireAuth(req, res, next) {
-  const authHeader = req.headers.authorization || '';
-  const token = authHeader.split(' ')[1];
+  const bearerHeader = req.headers['authorization'];
+  const cookieToken = req.cookies?.authToken;
+  const token = cookieToken || (bearerHeader?.startsWith('Bearer ') ? bearerHeader.split(' ')[1] : null);
 
-  if (!token) return res.status(401).json({ error: 'Missing token' });
+  console.log('[AUTH] Headers:', req.headers);
+  console.log('[AUTH] Cookie token:', cookieToken);
+  console.log('[AUTH] Authorization header:', bearerHeader);
+  console.log('[AUTH] Selected token:', token);
+
+  if (!token) {
+    console.warn('[AUTH] Missing token');
+    return res.status(401).json({ message: 'Missing token' });
+  }
 
   try {
-    const decoded = verifyToken(token); // <== must succeed
-    req.user = decoded;
+    const payload = verifyToken(token);
+    console.log('[AUTH] Token verified. Payload:', payload);
+    req.user = payload;
     next();
   } catch (err) {
-    console.error("[auth] Invalid token:", err.message);
-    return res.status(401).json({ error: 'Invalid token' });
+    console.error('[AUTH] JWT verification failed:', err.message);
+    return res.status(403).json({ message: 'Invalid token' });
   }
 }
