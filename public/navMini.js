@@ -219,8 +219,20 @@ function wire() {
 
 /* ---------- boot after navbar is injected ---------- */
 (function boot() {
-  if (wire()) return;
+  // Try to wire immediately if the navbar DOM is already present
+  const start = () => {
+    try { return !!wire(); } catch { return false; }
+  };
+  if (start()) return;
+
+  // Retry once DOM is interactive
+  document.addEventListener('DOMContentLoaded', () => { if (start()) return; });
+
+  // Listen for an explicit "navbar ready" signal from navbar.js
+  document.addEventListener('pp:navbar:ready', () => { start(); });
+
+  // Observe for navbar injection into #navbar-container
   const root = document.getElementById('navbar-container') || document.documentElement;
-  const mo = new MutationObserver(() => { if (wire()) mo.disconnect(); });
+  const mo = new MutationObserver(() => { if (start()) mo.disconnect(); });
   mo.observe(root, { childList: true, subtree: true });
 })();

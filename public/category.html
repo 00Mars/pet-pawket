@@ -43,9 +43,9 @@
             <div>
   <label class="filter-label">Price Range</label>
   <div class="price-range-inputs">
-    <input type="number" id="price-min" min="0" step="0.01" value="0" />
+    <input type="number" id="price-min" min="0" step="0.01" value="0" title="Minimum price" placeholder="0.00" />
     <span class="price-separator">–</span>
-    <input type="number" id="price-max" min="0" step="0.01" value="100" />
+    <input type="number" id="price-max" min="0" step="0.01" value="100" title="Maximum price" placeholder="100.00" />
   </div>
 </div>
 
@@ -57,7 +57,7 @@
 
     <!-- Sort & Search -->
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <select id="sort-options" class="form-select w-auto">
+      <select id="sort-options" class="form-select w-auto" title="Sort products" aria-label="Sort products">
         <option value="price-asc">Price (Low → High)</option>
         <option value="price-desc">Price (High → Low)</option>
         <option value="newest">Newest</option>

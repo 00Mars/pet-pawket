@@ -1,6 +1,7 @@
 #hero-carousel {
   padding-top: 40px;
   background: linear-gradient(120deg, rgb(255 155 42 / 85%), rgb(255 214 96 / 85%));
+  -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
 }
 
@@ -28,6 +29,7 @@
   border-radius: 16px;
   background-color: rgb(255 255 255 / 60%);
   box-shadow: 0 6px 12px rgb(0 0 0 / 8%);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 
@@ -35,11 +37,13 @@
 #featured-products {
   padding: 1.5rem;
   background: rgb(255 255 255 / 80%);
+  -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
 }
 
 #footer-container {
   background: rgb(255 255 255 / 70%);
+  -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
   border-top: 1px solid rgb(0 0 0 / 5%);
 }

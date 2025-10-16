@@ -40,6 +40,7 @@
   border-radius: var(--pp-card-radius, 20px);
   background: var(--pp-header-glass, rgba(255,255,255,.8));
   box-shadow: var(--pp-shadow-md, 0 10px 26px rgb(0 0 0 / 10%));
+  -webkit-backdrop-filter: blur(6px) saturate(240%);
   backdrop-filter: blur(6px) saturate(240%);
 }
 
@@ -51,6 +52,7 @@
   border-radius: var(--pp-card-radius, 20px);
   background: var(--pp-glass-bg2, rgb(255 255 255 / 10%));
   box-shadow: var(--pp-shadow-sm, 0 4px 14px rgb(0 0 0 / 8%));
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
   backdrop-filter: blur(6px) saturate(120%);
   padding: 1rem;
   margin: 0 0 2rem;
@@ -118,6 +120,7 @@
   border-radius:16px;
   background: var(--pp-glass-strong, rgb(255 255 255 / 78%));
   box-shadow: var(--pp-shadow-sm, 0 4px 14px rgb(0 0 0 / 8%));
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   padding: 1rem;
 }

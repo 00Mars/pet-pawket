@@ -115,12 +115,12 @@
             </a>
             <div id="pp-wish-menu" class="dropdown-menu icon-dropdown-menu dropdown-menu-end p-0 shadow"
                  role="menu" aria-labelledby="nav-wish-toggle">
-              <div class="p-3 text-muted small">Loading…</div>
+              <div class="p-3 text-muted small" role="menuitem" tabindex="-1">Loading…</div>
             </div>
           </div>
 
           <!-- Cart -->
-          <div class="icon-dropdown dropdown" id="nav-cart"><!-- added .dropdown -->
+          <div class="icon-dropdown dropdown" data-pp="pp-wish" id="nav-cart"><!-- added .dropdown -->
             <a href="#" id="nav-cart-toggle" aria-label="Cart" aria-haspopup="true" aria-expanded="false"
                aria-controls="cart-menu" data-bs-toggle="dropdown">
               <i class="icon bi bi-cart3" aria-hidden="true"></i>
@@ -131,7 +131,7 @@
           </div>
 
           <!-- Orders -->
-          <div class="icon-dropdown dropdown"><!-- added .dropdown -->
+          <div class="icon-dropdown dropdown" id="nav-cart"><!-- added .dropdown -->
             <a href="#" id="nav-orders-toggle" aria-haspopup="true" aria-expanded="false"
                data-bs-toggle="dropdown" aria-label="Orders">
               <i class="icon bi bi-truck" aria-hidden="true"></i>
@@ -177,7 +177,7 @@
       </div>
     </div>
 
-    <div id="search-results" class="search-results" role="listbox" aria-live="polite"></div>
+    <div id="search-results" class="search-results" role="listbox" aria-live="polite" aria-label="Search results"></div>
   </div>
 </div>
 

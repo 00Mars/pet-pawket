@@ -3,6 +3,7 @@
     z-index: 2;             /* ✅ ensure it's above the shapes */
     padding: 60px 20px;
     background: linear-gradient(120deg, rgb(0 130 179 / 80%), rgb(0 198 215 / 80%));
+    -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
     border-top: 10px solid rgb(255 194 124 / 85%);
     
