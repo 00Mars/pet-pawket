@@ -503,6 +503,7 @@ export function injectNavbar(callback){
         injectSearchOverlayStyles();
       })();
 
+      // Defer UI wiring one frame so the DOM is fully ready
       requestAnimationFrame(() => {
         attachNavbarModals?.();
         onAuthChange?.(updateAuthDisplay);
@@ -512,14 +513,24 @@ export function injectNavbar(callback){
         ensureCartBadge();
 
         try { callback?.(); } catch (e) { console.warn('[injectNavbar] callback warn:', e); }
+
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) document.body.classList.add('touch-device');
+
+        const toggles = container.querySelectorAll('.mobile-menu-toggle');
+        toggles.forEach((t) => t.addEventListener('click', toggleMobileMenu));
+
+        setupResponsiveMobileMenu?.();
+        setupDropdownToggles?.();
+
+        // Signal that the navbar is ready (for late‑binding consumers)
+        try { document.dispatchEvent(new CustomEvent('pp:navbar:ready')); } catch {}
+
+        // Ensure the mini navbar (wishlist + mini cart) is loaded after injection
+        // This avoids races with lazy loaders that look for DOM markers too early.
+        import('/navMini.js')
+          .then(() => { try { console.info('[navbar] navMini loaded'); } catch {} })
+          .catch((e) => { console.warn('[navbar] navMini load failed (wishlist/cart menus may not populate):', e); });
       });
-
-      if ('ontouchstart' in window || navigator.maxTouchPoints > 0) document.body.classList.add('touch-device');
-
-      const toggles = container.querySelectorAll('.mobile-menu-toggle');
-      toggles.forEach((t) => t.addEventListener('click', toggleMobileMenu));
-      setupResponsiveMobileMenu?.();
-      setupDropdownToggles?.();
     })
     .catch((err) => console.error('[injectNavbar] Injection failed:', err));
 }
@@ -530,3 +541,21 @@ if (document.readyState === 'loading') {
 } else {
   injectNavbar();
 }
+(function boot() {
+  // Try to wire immediately if the navbar DOM is already present
+  const start = () => {
+    try { return !!wire(); } catch { return false; }
+  };
+  if (start()) return;
+
+  // Retry once DOM is interactive
+  document.addEventListener('DOMContentLoaded', () => { if (start()) return; });
+
+  // Listen for an explicit "navbar ready" signal from navbar.js
+  document.addEventListener('pp:navbar:ready', () => { start(); });
+
+  // Observe for navbar injection into #navbar-container
+  const root = document.getElementById('navbar-container') || document.documentElement;
+  const mo = new MutationObserver(() => { if (start()) mo.disconnect(); });
+  mo.observe(root, { childList: true, subtree: true });
+})();

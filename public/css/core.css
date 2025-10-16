@@ -58,6 +58,7 @@ color: white;
 
 /* Visual */
 background: linear-gradient(120deg, rgb(0 0 0 / 85%), rgb(27 27 27 / 85%));
+-webkit-backdrop-filter: blur(1px);
 backdrop-filter: blur(1px);
 border-top: 2px solid rgb(255 255 255 / 50%);
 }
@@ -76,6 +77,7 @@ height: 170px;
 /* Visual */
 background: linear-gradient(120deg, rgb(0 130 179 / 95%), rgb(0 198 215 / 95%));
 filter: drop-shadow(0 6px 10px rgb(101 68 30 / 40%));
+-webkit-backdrop-filter: blur(6px);
 backdrop-filter: blur(6px);
 border-top: 2px solid rgb(255 255 255 / 5%);
 border-bottom: 2px solid rgb(0 0 0 / 5%);
@@ -956,6 +958,7 @@ padding: 3.5rem;
 background: rgb(255 255 255 / 80%);
 border-top: 6px solid rgb(10 16 176 / 5%);
 border-bottom: 6px solid rgb(10 16 176 / 5%);
+-webkit-backdrop-filter: blur(1px);
 backdrop-filter: blur(1px);
 }
 
@@ -963,6 +966,7 @@ backdrop-filter: blur(1px);
 #footer-container {
 /* Visual */
 background: rgb(255 255 255 / 70%);
+-webkit-backdrop-filter: blur(2px);
 backdrop-filter: blur(2px);
 border-top: 1px solid rgb(0 0 0 / 5%);
 }
@@ -984,6 +988,7 @@ height: 100vh;
 
 /* Visual */
 background-color: rgb(255 255 255 / 30%);
+-webkit-backdrop-filter: blur(10px);
 backdrop-filter: blur(10px);
 }
 
@@ -1074,6 +1079,7 @@ padding: 2rem 1rem 1rem;
 /* Visual */
 background: rgb(0 140 190 / 95%);
 opacity: 0;
+-webkit-backdrop-filter: blur(6px);
 backdrop-filter: blur(6px);
 
 /* Transitions & animation */

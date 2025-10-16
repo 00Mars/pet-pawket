@@ -25,6 +25,7 @@
   background: var(--pp-glass-bg);
   border-top: 5px solid var(--pp-glass-accent);   /* tiny translucent blue */
   border-bottom: 1px solid var(--pp-glass-border);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
   backdrop-filter: blur(12px) saturate(120%);
 }
 
