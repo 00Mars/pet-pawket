@@ -11,3 +11,4 @@ build/
 *.db
 *.sqlite
 *.sqlite3
+*.zip
