@@ -1,0 +1,256 @@
+/* ---------- Tweakables ---------- */
+:root{
+  --nav-h: 148px;                /* keep content below navbar */
+  --section-gap: 28px;
+  --section-pad: 18px;
+
+  --card-bg: #fff;
+  --card-border: #e9ecef;
+  --card-radius: 18px;
+  --card-shadow: 0 10px 30px rgba(0,0,0,.06);
+
+  /* unified header look (same across ALL cards) */
+  --card-head-bg: #f2f6f8;       /* light tint */
+  --card-head-text: #008ca1;     /* teal */
+}
+
+/* ---------- Page shell ---------- */
+body{
+  position:relative; display:flex; flex-direction:column; min-height:100vh;
+  background-image:url('/assets/images/PPBG1.svg'); background-repeat:repeat;
+  background-size:400px 400px; background-attachment:fixed;
+}
+body::before{
+  position:fixed; inset:0; z-index:-1; content:"";
+  background:linear-gradient(135deg, rgb(143 216 243 / 80%), rgb(137 245 255 / 80%));
+  pointer-events:none; -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
+}
+
+/* keep account below the nav */
+main.container.py-5{ padding-top: calc(var(--nav-h) + 40px) !important; padding-bottom:80px; }
+main.container .row.g-4{ align-items:start; }
+
+/* =========================================================
+   RIGHT COLUMN — section headers + fused bodies
+   ========================================================= */
+.section-title{
+  margin-top: calc(var(--section-gap) + 8px) !important;
+  margin-bottom: 0 !important;
+  padding: 12px 18px !important;
+  background: var(--card-head-bg) !important;
+  color: var(--card-head-text) !important;
+  border: 1px solid var(--card-border) !important;
+  border-bottom: 0 !important;
+  border-top-left-radius: var(--card-radius) !important;
+  border-top-right-radius: var(--card-radius) !important;
+  box-shadow: var(--card-shadow) !important;
+  scroll-margin-top: calc(var(--nav-h) + 12px);
+  font-size: clamp(1.25rem, 1rem + 0.8vw, 1.6rem) !important;
+}
+.section-title + *{
+  background: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  border-top: 0 !important;
+  border-bottom-left-radius: var(--card-radius) !important;
+  border-bottom-right-radius: var(--card-radius) !important;
+  box-shadow: var(--card-shadow) !important;
+  padding: var(--section-pad) clamp(16px, 3vw, 22px) !important;
+}
+.section-title + * + .section-title{ margin-top: var(--section-gap) !important; }
+
+/* flatten any unintended inner “card” inside a section body */
+.section-title + * > :is(.card,.panel,.inner-card,form){
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* =========================================================
+   LEFT COLUMN — cards with a single internal header strip
+   (fix: remove top padding so the tinted bar sits flush)
+   ========================================================= */
+main.container .row.g-4 > .col-lg-3 > *{
+  background:var(--card-bg) !important;
+  border:1px solid var(--card-border) !important;
+  box-shadow:var(--card-shadow) !important;
+  padding-top: 0 !important;           /* <-- key fix so header isn’t wrapped in white */
+  margin-bottom:var(--section-gap) !important;
+}
+main.container .row.g-4 > .col-lg-3 > *:first-child{
+  margin-top: calc(var(--section-gap) + 8px) !important;
+}
+
+/* reset ALL nested headings so they do NOT look like header strips
+   (prevents “Signed in as” from being styled) */
+main.container .row.g-4 > .col-lg-3 > * :where(h1,h2,h3,h4,h5,h6){
+  background: none !important;
+  color: inherit !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  margin: .25rem 0 .5rem !important;
+  padding: 0 !important;
+  padding-inline: clamp(14px, 3vw, 18px) !important; /* keep card’s side padding defined */
+  border-radius: 0 !important;
+}
+
+/* only style the FIRST, DIRECT heading in the left card as a header strip
+   (this hits “My Account” / “Your Progress”, not “Signed in as”) */
+main.container .row.g-4 > .col-lg-3 > * > :is(h1,h2,h3,h4,h5,h6):first-child{
+  display: block;
+  margin: 0 0 12px 0 !important;
+  margin-inline: calc(-1 * clamp(14px, 3vw, 18px)) !important;
+  padding: 12px 18px !important;
+  padding-inline: clamp(14px, 3vw, 18px) !important;
+  background: var(--card-head-bg) !important;
+  color: var(--card-head-text) !important;
+  border-bottom: 1px solid var(--card-border) !important;
+  border-top-left-radius: var(--card-radius) !important;
+  border-top-right-radius: var(--card-radius) !important;
+  font-size: clamp(1.1rem, 1rem + .3vw, 1.25rem) !important;
+}
+
+.card-header {
+
+  background: var(--card-head-bg);
+  color: var(--card-head-text);
+  border-bottom: 1px solid var(--card-border);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 10px 16px;
+
+}
+
+.card-header #myAccountHeader,
+.card-header #progressHeader {
+
+  
+  border-top-left-radius: calc(var(--card-radius) - 2px) !important;
+  border-top-right-radius: calc(var(--card-radius) - 2px) !important;
+
+ }
+/* =========================================================
+   Addresses body polish (items as rows)
+   ========================================================= */
+#account-addresses :is(ul,ol){ list-style:none; margin:0; padding-left:0; }
+#account-addresses :is(li,.address-item,.address-row,.address-card){
+  background:#f8fafc;
+  border:1px solid #eef2f7;
+  border-radius:12px;
+  padding:12px 14px;
+  margin:8px 0;
+}
+#account-addresses .btn-group,
+#account-addresses .actions{ display:flex; gap:8px; flex-wrap:wrap; }
+
+/* Pets & Orders tiny alignment helpers */
+#account-pets #petList .card,
+#ordersContainer .card{ border-color:var(--card-border); }
+
+/* ---------- Small helpers ---------- */
+.requires-auth{ display:none; }
+.scrollable-inner{ overflow-y:auto; max-height:70vh; padding-right:1rem; }
+
+/* ---------- Avatar controls ---------- */
+.remove-avatar-btn{
+  position:absolute; top:8px; right:8px; z-index:10;
+  padding:4px 8px; border:none; font-size:32px; font-weight:900; line-height:1;
+  color:red; background:none; cursor:pointer; transition:transform .15s ease;
+  text-shadow:0 0 2px #fff,0 0 4px #fff,0 0 6px #fff;
+}
+.remove-avatar-btn:hover{ transform:scale(1.2); }
+
+/* ---------- Modals (scoped to account) ---------- */
+#editPetModal.custom-modal{
+  position:fixed; inset:0; z-index:1050; display:none; align-items:center; justify-content:center;
+  padding:24px; background: color-mix(in srgb, var(--card-bg) 10%, #000 60%); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
+}
+#editPetModal.custom-modal:not(.hidden){ display:flex; }
+#editPetModal .modal-content{
+  width:min(760px, calc(100vw - 32px)); max-height:min(90vh, 760px);
+  background:var(--card-bg); color:var(--bs-body-color,#222);
+  border-radius:16px; box-shadow:0 16px 60px rgba(0,0,0,.25);
+  display:grid; grid-template-rows:auto 1fr auto; overflow:hidden; outline:none;
+  transform:translateY(8px); opacity:0; animation:modalIn .18s ease-out forwards;
+}
+#editPetModal .modal-header{
+  padding:16px 20px; border-bottom:1px solid var(--card-border);
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+#editPetModal .modal-body{ padding:16px 20px; overflow:auto; }
+#editPetModal .modal-footer{
+  position:sticky; bottom:0; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px;
+  border-top:1px solid var(--card-border);
+  background:linear-gradient(to bottom, color-mix(in srgb, var(--card-bg) 92%, transparent), var(--card-bg));
+}
+
+/* Journal modal */
+#journal-modal .modal-content{
+  position:relative; display:flex; flex-direction:column; overflow:hidden;
+  max-width:700px; max-height:90vh; padding:2rem 1em 2rem 1rem; border-radius:14px; background:var(--card-bg);
+  box-shadow:0 12px 28px rgb(0 0 0 / 25%); animation:fadeIn .2s ease-in-out;
+}
+#journal-modal .modal-content > *{ box-sizing:border-box; overflow-wrap:break-word; }
+
+/* ---------- Edit Pet: trait chips ---------- */
+#editPetForm .grid{ display:grid; gap:12px 16px; grid-template-columns:200px 1fr; }
+@media (max-width:640px){ #editPetForm .grid{ grid-template-columns:1fr; } }
+#editPetForm .field label{ font-weight:600; font-size:.95rem; margin-bottom:4px; display:inline-block; }
+#editPetForm .muted{ color:var(--bs-secondary-color,#6b7280); font-size:.85rem; }
+#editPetForm .avatar-wrap{ display:grid; grid-template-columns:112px 1fr; gap:12px; align-items:center; }
+#editPetModal #avatarPreview{ width:112px; height:112px; object-fit:cover; border-radius:12px; border:1px solid var(--card-border); background:#f8f9fa; }
+
+#editPetModal .trait-section{ margin-top:6px; }
+#editPetModal .trait-grid-2{ display:grid; gap:12px 16px; grid-template-columns:1fr 1fr; }
+#editPetModal .trait-grid-3{ display:grid; gap:12px 16px; grid-template-columns:1fr 1fr 1fr; }
+@media (max-width:640px){ #editPetModal .trait-grid-2, #editPetModal .trait-grid-3{ grid-template-columns:1fr; } }
+#editPetModal .trait-group{ margin-top:4px; }
+#editPetModal .trait-group-label{ font-weight:600; margin-bottom:6px; }
+#editPetModal .trait-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+#editPetModal .trait-chip{
+  appearance:none; border:1px solid #d0d5dd;
+  background:#fff; border-radius:9999px; padding:8px 12px; font-size:.95rem; line-height:1; cursor:pointer;
+  transition:border-color .12s ease, box-shadow .12s ease, background .12s ease, color .12s ease;
+}
+#editPetModal .trait-chip:hover{ border-color:var(--card-head-text); }
+#editPetModal .trait-chip[aria-pressed="true"]{
+  color:var(--card-head-text);
+  background: color-mix(in srgb, var(--card-head-text) 10%, #fff);
+  border-color:var(--card-head-text);
+  box-shadow:0 0 0 2px color-mix(in srgb, var(--card-head-text) 18%, transparent);
+}
+#editPetModal .trait-chip[disabled]{ opacity:.45; cursor:not-allowed; pointer-events:none; }
+
+/* ---------- Journal entry visuals ---------- */
+.journal-entry-wrapper{
+  padding:1rem 1.25rem; border-radius:12px; background:#fff;
+  box-shadow:0 4px 12px rgb(0 0 0 / 6%); transition:transform .2s ease, background-color .2s ease;
+}
+.journal-entry-wrapper:hover{ transform:translateY(-2px); }
+.journal-entry-date{ font-size:.95rem; font-weight:600; color:#444; }
+.journal-note{ white-space:pre-line; margin-top:.25rem; font-size:.95rem; line-height:1.5; color:#333; }
+.journal-tag{ margin-right:4px; padding:4px 8px; border-radius:999px; font-size:.75rem; font-weight:500; color:#fff; background-color:#008ca1; }
+.journal-entry-wrapper img{ display:block; max-width:100%; margin-top:.75rem; border-radius:8px; box-shadow:0 2px 6px rgb(0 0 0 / 8%); }
+.journal-entry-wrapper[data-mood="Happy"]{ border-left:5px solid #ffd43b; }
+.journal-entry-wrapper[data-mood="Sleepy"]{ border-left:5px solid #6c757d; }
+.journal-entry-wrapper[data-mood="Excited"]{ border-left:5px solid #0d6efd; }
+.journal-entry-wrapper[data-mood="Anxious"]{ border-left:5px solid #dc3545; }
+.journal-entry-wrapper[data-mood="Lonely"]{ border-left:5px solid #6610f2; }
+.journal-entry-wrapper[data-mood="Curious"]{ border-left:5px solid #198754; }
+.journal-entry-wrapper[data-mood="Protective"]{ border-left:5px solid #6f42c1; }
+.journal-entry-wrapper[data-mood="Mischievous"]{ border-left:5px solid #fd7e14; }
+.journal-entry-wrapper[data-mood="Peaceful"]{ border-left:5px solid #20c997; }
+.journal-entry-wrapper[data-mood="Inspired"]{ border-left:5px solid #ffc107; }
+
+/* ---------- Animations & fallbacks ---------- */
+@keyframes modalIn{ to{ transform:translateY(0); opacity:1; } }
+@keyframes fadeIn{ from{ opacity:0; } to{ opacity:1; } }
+
+@media (max-width: 768px){
+  :root{ --nav-h: 112px; }
+}
+@media (prefers-reduced-motion: reduce){
+  #editPetModal .modal-content, #journal-modal .modal-content{ animation:none; }
+  .journal-entry-wrapper{ transition:none; }
+}

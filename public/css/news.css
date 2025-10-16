@@ -1,0 +1,83 @@
+.latest-news-section {
+    position: relative;     /* ✅ required to create a new stacking context */
+    z-index: 2;             /* ✅ ensure it's above the shapes */
+    padding: 60px 20px;
+    background: linear-gradient(120deg, rgb(0 130 179 / 80%), rgb(0 198 215 / 80%));
+    backdrop-filter: blur(2px);
+    border-top: 10px solid rgb(255 194 124 / 85%);
+    
+  }
+  
+  
+  .latest-news-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .news-title {
+    margin-bottom: 40px;
+    font-size: 38px;
+    font-weight: 700;
+    color: #fff;
+    filter: drop-shadow(2px 2px 6px rgb(0 0 0 / 60%));
+  }
+  
+  .news-card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+  
+  .news-card {
+    overflow: hidden;
+    max-width: 340px;
+    border-radius: 12px;
+    text-align: left;
+    background: white;
+    box-shadow: 0 10px 25px rgb(0 0 0 / 5%);
+    filter: drop-shadow(2px 2px 6px rgb(0 0 0 / 80%));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .news-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgb(0 0 0 / 8%);
+  }
+  
+  .news-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+  
+  .news-content {
+    padding: 20px;
+  }
+  
+  .news-link {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: underline;
+    color: #111;
+  }
+  
+  .news-date {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #888;
+  }
+  
+  .news-desc {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #444;
+  }
+  

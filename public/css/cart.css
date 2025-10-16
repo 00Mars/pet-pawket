@@ -1,0 +1,142 @@
+/* /public/css/cart.css
+   Cart page polish (v2.2) — FIX: move the entire section down (no stretch),
+   keep sticky summary aligned, and preserve footer-flash prevention.
+*/
+
+/* Per-page spacing knob (how much we “lift” content toward the navbar) */
+.cart-page { --cart-nav-lift: 36px; }
+
+/* -----------------------------------------------------------
+   Footer flash prevention (same approach as product page)
+----------------------------------------------------------- */
+.cart-page .shop-surface { z-index: 0; }
+.cart-page .shop-surface::before,
+.cart-page .shop-surface::after { z-index: 0; pointer-events: none; }
+.cart-page .shop-surface::after { height: 0; } /* don’t overscan into footer */
+.cart-page #footer-container { position: relative; z-index: 1; }
+
+/* Center the cart content and keep it a comfortable width */
+.cart-page .shop-grid > .container { max-width: 1200px; }
+
+/* Global spacing
+   IMPORTANT: move the WHOLE section down with margin-top (no padding stretch) */
+.cart-page .shop-grid {
+  margin-top: calc(max(0px, var(--nav-offset, 120px) - var(--cart-nav-lift, 36px)));
+  padding-top: 0;
+  padding-bottom: 64px;
+}
+
+/* -----------------------------------------------------------
+   Header (leave visuals as-is; no artificial top padding)
+----------------------------------------------------------- */
+.cart-page .shop-head {
+  padding-top: 0;
+  margin: 0 0 0.75rem;
+}
+.cart-page .head-card {
+  margin: 0;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--pp-glass-border, rgba(255,255,255,.35));
+  border-radius: var(--pp-card-radius, 20px);
+  background: var(--pp-header-glass, rgba(255,255,255,.8));
+  box-shadow: var(--pp-shadow-md, 0 10px 26px rgb(0 0 0 / 10%));
+  backdrop-filter: blur(6px) saturate(240%);
+}
+
+/* -----------------------------------------------------------
+   Main glass panel that wraps items + summary
+----------------------------------------------------------- */
+.cart-card{
+  border: 1px solid var(--pp-glass-border, rgba(255,255,255,.35));
+  border-radius: var(--pp-card-radius, 20px);
+  background: var(--pp-glass-bg2, rgb(255 255 255 / 10%));
+  box-shadow: var(--pp-shadow-sm, 0 4px 14px rgb(0 0 0 / 8%));
+  backdrop-filter: blur(6px) saturate(120%);
+  padding: 1rem;
+  margin: 0 0 2rem;
+}
+
+/* Two-column layout */
+.cart-layout{
+  display: grid;
+  grid-template-columns: minmax(480px, 1fr) 360px;
+  gap: 1.25rem 1.5rem;
+  align-items: start;
+}
+@media (width <= 1100px){
+  .cart-layout{ grid-template-columns: minmax(420px, 1fr) 340px; }
+}
+@media (width <= 980px){
+  .cart-layout{ grid-template-columns: 1fr; }
+}
+
+/* Items table visuals */
+.table-wrap{
+  background:#fff;
+  border-radius:16px;
+  border:1px solid rgba(0,0,0,.06);
+  overflow:hidden;
+}
+.cart-table thead th{
+  background:#f7fafc;
+  color:#2a3a42;
+  border-bottom:1px solid rgba(0,0,0,.06);
+  font-weight:700;
+}
+.cart-table tbody td{ vertical-align: middle; }
+.cart-table .col-img{ width: 92px; }
+.cart-table .col-actions{ width: 44px; }
+
+/* Product cell */
+.cart-title{ font-weight:700; color:#1d2a32; margin:0; }
+.cart-meta{ color:#3c596b; font-size:.92rem; }
+
+/* Thumbs */
+.cart-thumb{
+  width: 72px; height: 72px; object-fit: cover; display:block;
+  border-radius:12px; border:1px solid rgba(0,0,0,.06); background:#f3f6f8;
+}
+
+/* Qty steppers */
+.qty-wrap{ display:flex; align-items:center; gap:.4rem; justify-content:center; }
+.qty-wrap input[type="number"]{
+  width: 72px; height: 38px; text-align:center;
+  border:1px solid rgba(0,0,0,.12); border-radius:12px; background:#fff;
+}
+
+/* Remove button */
+.btn-remove{
+  width:36px; height:36px; border-radius:50%;
+  border:1px solid rgba(0,0,0,.12); background:#fff;
+}
+
+/* Summary — sticky with the SAME top offset used above, so it stays aligned */
+.cart-summary{
+  position: sticky;
+  top: calc(max(0px, var(--nav-offset, 120px) - var(--cart-nav-lift, 36px)) + 0.5rem);
+  border:1px solid var(--pp-glass-border, rgba(255,255,255,.35));
+  border-radius:16px;
+  background: var(--pp-glass-strong, rgb(255 255 255 / 78%));
+  box-shadow: var(--pp-shadow-sm, 0 4px 14px rgb(0 0 0 / 8%));
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+}
+.cart-summary .row-line{ display:flex; justify-content:space-between; margin:.35rem 0; }
+.cart-summary .btn-checkout{ width:100%; height:44px; border-radius:14px; }
+
+/* Head bar above the table */
+.cart-headbar{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:.65rem; padding:.25rem .25rem .6rem;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+
+/* Compact the “Back to Shop” link spacing */
+.cart-page nav[aria-label="breadcrumbs"]{ margin-top: .5rem; }
+
+.shop-surface {
+
+    padding-top: 3rem;
+    margin-top: -4rem;
+
+}

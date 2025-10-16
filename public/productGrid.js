@@ -1,0 +1,1 @@
+export { initFeaturedGrid as initCatalogGrid } from './featuredGrid.js';

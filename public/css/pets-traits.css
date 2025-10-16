@@ -1,0 +1,185 @@
+/* =========================================
+   Pet Traits UI — polished & overflow-safe
+   (no HTML/JS changes required)
+   ========================================= */
+
+#editPetModal * { box-sizing: border-box; }
+
+#editPetModal .modal-content {
+  /* wider breathing room without exceeding viewport */
+  width: min(100%, 980px);
+  max-width: 980px;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(16,24,40,.12);
+  padding: clamp(16px, 2.2vw, 28px);
+  overflow: hidden;            /* clip inner scroller to rounded corners */
+}
+
+#editPetModal .scrollable-modal {
+  max-height: calc(100vh - 96px); /* keep header/footer visible */
+  overflow-y: auto;
+  overflow-x: hidden;             /* kill accidental horizontal scroll */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges; /* prevent layout shift when scrollbar appears */
+  padding-right: .25rem;          /* room for vertical scrollbar */
+}
+
+/* Some templates use a custom width helper on the file input; cap it safely */
+#editPetModal .w-85 { width: 100%; max-width: 520px; }
+
+/* ---------------- Sections (card-style) ---------------- */
+
+#editPetModal .trait-section {
+  background: #fafbff;
+  border: 1px solid rgba(16,24,40,.06);
+  border-radius: 12px;
+  padding: 12px 12px 14px;
+  margin: 16px 0;
+}
+#editPetModal .trait-section h6 {
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #0f172a;
+}
+
+/* ---------------- Responsive grids ---------------- */
+
+#editPetModal .trait-grid-2,
+#editPetModal .trait-grid-3 {
+  display: grid;
+  gap: 12px 14px;
+}
+
+#editPetModal .trait-grid-2 {
+  /* expand comfortably on desktop, wrap before squishing */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+#editPetModal .trait-grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+@media (max-width: 576px) {
+  #editPetModal .trait-grid-2,
+  #editPetModal .trait-grid-3 { grid-template-columns: 1fr; }
+}
+
+#editPetModal .trait-group {
+  min-width: 0;  /* allow content to shrink without overflow */
+}
+#editPetModal .trait-group .label {
+  font-weight: 600;
+  margin-bottom: .35rem;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------------- Chips ---------------- */
+
+#editPetModal .trait-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem .5rem;
+}
+
+/* Plain chip variant (no .btn) */
+#editPetModal .trait-chip:not(.btn) {
+  border: 1px solid rgba(0,0,0,.12);
+  background: #fff;
+  color: #344054;
+  border-radius: 999px;
+  padding: .38rem .66rem;
+  font-size: .92rem;
+  line-height: 1.2;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: border-color .15s, background-color .15s, color .15s, box-shadow .15s;
+}
+#editPetModal .trait-chip:not(.btn):hover { border-color: var(--bs-primary, #0d6efd); }
+#editPetModal .trait-chip:not(.btn)[aria-pressed="true"] {
+  background: #e7f3ff;                 /* light primary tint */
+  border-color: #8cc0ff;
+  color: #0b5ed7;
+  box-shadow: 0 0 0 .12rem rgba(140,192,255,.3);
+}
+
+/* Bootstrap .btn chips should visually match */
+#editPetModal .trait-chip.btn {
+  border-radius: 999px !important;
+  padding: .38rem .66rem;
+  line-height: 1.2;
+}
+#editPetModal .trait-chip.btn[aria-pressed="true"] {
+  background-color: #e7f3ff;
+  border-color: #8cc0ff;
+  color: #0b5ed7;
+  box-shadow: 0 0 0 .12rem rgba(140,192,255,.3);
+}
+
+/* “Unknown” — de-emphasized and sorted last */
+#editPetModal .trait-chip[data-value="unknown"][aria-pressed="true"] {
+  background: #f3f4f6;
+  border-color: #e5e7eb;
+  color: #6b7280;
+  box-shadow: none;
+}
+#editPetModal .trait-chips .trait-chip[data-value="unknown"] { order: 99; }
+
+/* Small chip rows (e.g., dynamic allergies list) */
+#editPetModal .trait-small .trait-chip {
+  padding: .26rem .5rem;
+  font-size: .84rem;
+}
+
+/* Removable chips: tiny "×" */
+#editPetModal .trait-chip .chip-x {
+  margin-left: .4rem;
+  font-weight: 700;
+  line-height: 1;
+  opacity: .7;
+}
+#editPetModal .trait-chip .chip-x:hover { opacity: 1; }
+
+/* ---------------- Inline field + chips (Allergies) ---------------- */
+
+#editPetModal .trait-inline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+#editPetModal .trait-inline input[type="text"] {
+  width: 100%;
+  max-width: 320px;              /* don’t grow too wide on large screens */
+}
+
+/* ---------------- Fit inputs ---------------- */
+
+@media (min-width: 576px) {
+  #editPetModal #trait-neck-in,
+  #editPetModal #trait-chest-in,
+  #editPetModal #trait-back-in {
+    max-width: 180px;
+  }
+}
+
+/* ---------------- Avatar polish ---------------- */
+
+#editPetModal #avatarPreview {
+  border-radius: .5rem;
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;               /* indicates click action */
+}
+
+#editPetModal .remove-avatar-btn {
+  display: none;                 /* hide the old red X button */
+}
+
+/* ---------------- Footer buttons ---------------- */
+
+#editPetModal #editPetForm .d-flex .btn { min-width: 120px; }

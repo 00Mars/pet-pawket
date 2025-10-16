@@ -1,0 +1,124 @@
+<!-- /public/cart.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Your Cart • Pet Pawket</title>
+
+  <!-- Existing site styles (keep if you already load this) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+
+  <!-- Shared tokens/glass (same as Shop/Product) -->
+  <link rel="stylesheet" href="/css/globals.css" />
+  <link rel="stylesheet" href="/css/core.css"/>
+  <link rel="stylesheet" href="/css/shop.css"/>
+  <!-- New cart polish -->
+  <link rel="stylesheet" href="/css/cart.css"/>
+  <link rel="stylesheet" href="/css/footer.css"/>
+
+  <link rel="icon" href="/favicon.ico"/>
+</head>
+<body class="shop-page cart-page">
+  <!-- Modular navbar/footer are injected into these containers (kept from your current setup) -->
+  <div id="navbar-container"></div>
+
+  <main class="shop-surface" id="main-content" role="main">
+    <section class="shop-grid" aria-label="Shopping cart">
+      <div class="container">
+        <header class="shop-head" role="banner">
+          <div class="head-card">
+            <h1 class="shop-title mb-1">Shopping Cart</h1>
+            <p class="shop-subtitle m-0">Review items, adjust quantities, and proceed to checkout.</p>
+          </div>
+        </header>
+
+        <div id="cart-status" class="pp-status" role="status" aria-live="polite"></div>
+
+        <!-- Two-column layout: items table (left) + sticky summary (right) -->
+        <div class="cart-card cart-layout">
+          <section aria-label="Items">
+            <div class="cart-headbar">
+              <div class="fw-semibold">Items</div>
+              <div class="text-muted small">Prices and availability are confirmed at checkout.</div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="table align-middle cart-table">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-img">Image</th>
+                    <th scope="col">Product</th>
+                    <th scope="col" class="text-end">Price</th>
+                    <th scope="col" class="text-center">Quantity</th>
+                    <th scope="col" class="text-end">Subtotal</th>
+                    <th scope="col" class="col-actions"></th>
+                  </tr>
+                </thead>
+                <tbody id="cart-items"><!-- rows from cart.js --></tbody>
+              </table>
+            </div>
+          </section>
+
+          <aside class="cart-summary" aria-label="Order summary">
+            <h2 class="h6 fw-bold mb-2">Summary</h2>
+            <div class="row-line"><span>Subtotal</span><span id="cart-total">$0.00</span></div>
+            <div class="row-line"><span>Shipping</span><span>Calculated at checkout</span></div>
+            <div class="row-line"><span>Taxes</span><span>Calculated at checkout</span></div>
+            <hr/>
+            <button id="checkout-button" class="btn btn-primary btn-checkout mt-1">Proceed to Checkout</button>
+          </aside>
+        </div>
+
+        <section id="wishlistPane" class="container py-3" role="region" aria-labelledby="wishlistHeading">
+          <h2 id="wishlistHeading" class="h5 mb-3">Your Wishlist</h2>
+          <div data-wishlist-list aria-live="polite"></div>
+        </section>
+
+        <nav class="mt-3" aria-label="breadcrumbs">
+          <a class="btn btn-link p-0" href="/shop.html" rel="prev">← Back to Shop</a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <!-- Scripts (your site bootstraps + cart logic) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script id="pp-bootstrap-fallback">
+  if (!window.bootstrap) {
+    var s = document.createElement("script");
+    s.src = "/vendor/bootstrap.bundle.min.js";
+    document.head.appendChild(s);
+  }
+</script>
+
+  <!-- Keep your existing module files and injection pattern -->
+  <script type="module">
+    import { updateCartBadge } from '/cartUtils.js';
+    // Inject navbar/footer (kept from your working page)
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/navbar.html')
+        .then(r => r.text())
+        .then(html => { document.getElementById('navbar-container').innerHTML = html; updateCartBadge(); });
+
+      fetch('/footer.html')
+        .then(r => r.text())
+        .then(html => { document.getElementById('footer-container').innerHTML = html; });
+    });
+  </script>
+
+  <!-- Your working cart logic (slightly polished below but same data model) -->
+  <script type="module" src="/main.js"></script>
+  <script type="module" src="/navbar.js"></script>
+  <script type="module" src="/cart.js"></script>
+  <script type="module" src="/hooksBoot.js"></script>
+
+  <script type="module">
+  import('/wishlist.js').then(()=>console.info('[pp:test] wishlist direct import ok')).catch(e=>console.error('[pp:test] wishlist direct import failed', e));
+</script>
+
+</body>
+</html>

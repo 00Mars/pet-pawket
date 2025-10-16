@@ -1,0 +1,162 @@
+<!-- /public/shop.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop • Pet Pawket</title>
+
+  <!-- Libs -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+
+  <!-- Site CSS -->
+  <link rel="stylesheet" href="/css/core.css"/>
+  <link rel="stylesheet" href="/css/footer.css"/>
+  <link rel="stylesheet" href="/css/hero.css"/>
+  <link rel="stylesheet" href="/css/shop.css"/>
+</head>
+<body>
+  <!-- Global navbar is injected elsewhere -->
+  <div id="navbar-container"></div>
+
+  <main class="shop-page" data-allow-offline="false" aria-describedby="pp-status">
+    <div class="shop-surface">
+      <section class="shop-stage">
+        <div class="container shop-container">
+
+          <!-- Header -->
+          <section class="shop-head" aria-labelledby="shop-title">
+            <div class="head-card" role="region">
+              <header class="head-card-inner">
+                <h1 id="shop-title" class="shop-title">Shop</h1>
+                <p class="shop-subtitle">
+                  Bright, friendly finds for pets and their people. Use categories, search &amp; sort — then layer on <em>For My Pets</em> for tailored picks.
+                </p>
+              </header>
+            </div>
+          </section>
+
+          <!-- Products section -->
+          <section class="shop-grid" aria-label="Product Gallery">
+
+            <!-- Quick chips (keys aligned to JS) -->
+            <div class="pp-chips" role="group" aria-label="Quick category filters">
+              <button type="button" class="chip active" data-chip="" aria-pressed="true">All</button>
+              <button type="button" class="chip" data-chip="dog">Dog</button>
+              <button type="button" class="chip" data-chip="cat">Cat</button>
+              <button type="button" class="chip" data-chip="small-pet">Small Pet</button>
+              <button type="button" class="chip" data-chip="bird">Bird</button>
+              <button type="button" class="chip" data-chip="fish">Fish</button>
+              <button type="button" class="chip" data-chip="accessories">Accessories</button>
+            </div>
+
+            <!-- Controls (sticky under nav) -->
+            <div class="pp-controls" role="region" aria-label="Shop controls">
+              <div class="control">
+                <label for="pp-search" class="form-label">Search</label>
+                <input id="pp-search" class="form-control" type="search" placeholder="Find toys, treats, collars..." autocomplete="off" />
+              </div>
+
+              <div class="control">
+                <label for="pp-category" class="form-label">Category</label>
+                <select id="pp-category" class="form-select" aria-label="Category">
+                  <option value="">All</option>
+                  <option value="dog">Dog</option>
+                  <option value="cat">Cat</option>
+                  <option value="small-pet">Small Pet</option>
+                  <option value="bird">Bird</option>
+                  <option value="fish">Fish</option>
+                  <option value="accessories">Accessories</option>
+                </select>
+              </div>
+
+              <div class="control">
+                <label for="pp-sort" class="form-label">Sort</label>
+                <select id="pp-sort" class="form-select" aria-label="Sort">
+                  <option value="relevance" selected>Relevance</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="title-asc">Name: A → Z</option>
+                  <option value="title-desc">Name: Z → A</option>
+                </select>
+              </div>
+
+              <div class="control">
+                <label for="pp-page-size" class="form-label">Items per page</label>
+                <select id="pp-page-size" class="form-select" aria-label="Items per page">
+                  <option value="24" selected>24</option>
+                  <option value="36">36</option>
+                  <option value="60">60</option>
+                </select>
+              </div>
+
+              <div class="form-check form-switch align-self-end">
+                <!-- id aligned to JS (SUB_TOGGLE expects 'pp-subscribe-only') -->
+                <input class="form-check-input" type="checkbox" id="pp-subscribe-only" />
+                <label class="form-check-label" for="pp-subscribe-only">Subscribe &amp; Save</label>
+              </div>
+
+              <div class="form-check form-switch align-self-end">
+                <input class="form-check-input" type="checkbox" id="pp-my-pets-toggle" />
+                <label class="form-check-label" for="pp-my-pets-toggle">For My Pets</label>
+              </div>
+            </div>
+
+            <!-- My Pets guidance & recs pane -->
+            <section id="pp-my-pane" class="pp-my-pane d-none" aria-label="Guidance & recommendations for your pets"></section>
+
+            <!-- Grid -->
+            <ul id="pp-grid" class="pp-grid" aria-label="Products"></ul>
+
+            <div id="pp-status" class="pp-status" aria-live="polite"></div>
+          </section>
+
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Subscribe plan modal -->
+  <div class="modal fade" id="pp-subscribe-modal" tabindex="-1" aria-labelledby="pp-subscribe-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="pp-subscribe-title">Subscribe &amp; Save</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="pp-subscribe-summary" class="mb-2"></p>
+          <div class="row g-2">
+            <div class="col-12">
+              <label for="pp-subscribe-interval" class="form-label">Delivery interval</label>
+              <select id="pp-subscribe-interval" class="form-select">
+                <option value="30" selected>Every month</option>
+                <option value="60">Every 2 months</option>
+                <option value="90">Every 3 months</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <div id="pp-subscribe-price"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" id="pp-subscribe-confirm">Start Subscription</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global footer is injected elsewhere -->
+  <div id="footer-container"></div>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="/navbar.js"></script>
+  <script type="module" src="/main.js"></script>
+  <script type="module" src="/navbar-shop-bridge.js"></script>
+  <script type="module" src="/shop.js"></script>
+</body>
+</html>

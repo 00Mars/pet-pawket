@@ -1,0 +1,241 @@
+/* PDP layout/spacing + layered depth (colors inherit from site theme). */
+
+/* ------------------------------ a11y: skip link ------------------------------ */
+.visually-hidden-focusable{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.visually-hidden-focusable:focus,
+.visually-hidden-focusable:focus-visible{position:fixed!important;top:.75rem;left:.75rem;z-index:9999;display:inline-block;padding:.5rem .75rem;border-radius:.5rem;border:2px solid currentColor;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.12)}
+
+/* ---------------------------------- tokens ---------------------------------- */
+:root{
+  /* if your site already defines --nav-offset, we'll use it; otherwise fallback */
+  --nav-fixed-h: var(--nav-offset, 96px);
+  --pdp-offset: calc(var(--nav-fixed-h) + 16px);
+
+  --pdp-radius-lg: 18px;
+  --pdp-radius-md: 12px;
+
+  /* column/row gaps */
+  --pdp-gap-x: 1.15rem;  /* left vs right */
+  --pdp-gap-y: 1.05rem;  /* stacked cards */
+
+  --pdp-border: rgba(0,0,0,.09);
+
+  /* Layered backplates for depth */
+  --pdp-plate-1: rgba(255,255,255,.32);
+  --pdp-plate-2: rgba(255,255,255,.44);
+  --pdp-plate-3: rgba(255,255,255,.58);
+
+  --pdp-card: rgba(255,255,255,.96);
+
+  --pdp-shadow-md: 0 10px 26px rgba(0,0,0,.10);
+  --pdp-shadow-lg: 0 18px 42px rgba(0,0,0,.12);
+
+  --pdp-sticky-top: calc(var(--nav-fixed-h) + 12px);
+
+  /* price color (dark, not black) */
+  --pdp-price-color: #2e3037;
+}
+
+/* ---------------- spacing to clear fixed navbar / surface wash --------------- */
+.pdp-page .pdp-section{padding:var(--pdp-offset) 0 120px}
+
+.pdp-surface{position:relative;isolation:isolate}
+.pdp-surface::before{
+  content:"";
+  position:absolute; inset:0; z-index:0;
+  pointer-events: none;
+  /* side softeners + warm+sky veils + faint white veil */
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.65), rgba(255,255,255,.45) 20%, rgba(255,255,255,.45) 80%, rgba(255,255,255,.65)),
+    radial-gradient(1100px 540px at 50% 18%, var(--pdp-sky-soft, rgba(11,116,255,.22)), transparent 70%),
+    radial-gradient(1200px 600px at 50% 20%, var(--pdp-accent-soft, rgba(255,154,26,.22)), transparent 70%),
+    linear-gradient(rgba(255,255,255,.15), rgba(255,255,255,.15));
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.pdp-surface::after{
+  content:"";
+  position:absolute; inset:0; z-index:0;
+  background: radial-gradient(1100px 700px at 50% 18%, rgba(255,255,255,.28), transparent 70%);
+  pointer-events:none;
+}
+
+/* ------------------------------- container/stage ----------------------------- */
+.pdp-container{max-width:1160px}
+.pdp-stage{position:relative;z-index:1;padding:14px}
+.pdp-plate{
+  position:absolute;inset:0;border-radius:calc(var(--pdp-radius-lg) + 6px);
+  border:1px solid var(--pdp-border);box-shadow:var(--pdp-shadow-md);
+  pointer-events:none;
+}
+.pdp-plate--1{background:var(--pdp-plate-1);backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px)}
+.pdp-plate--2{background:var(--pdp-plate-2);backdrop-filter:blur(2.5px);-webkit-backdrop-filter:blur(2.5px)}
+.pdp-plate--3{background:var(--pdp-plate-3);backdrop-filter:blur(3.5px);-webkit-backdrop-filter:blur(3.5px)}
+
+/* ----------------------------------- header --------------------------------- */
+.pdp-head{position:relative;z-index:2;margin:6px 0 10px}
+.pdp-head-card{
+  margin:0 auto 8px;padding:1rem 1.25rem;border-radius:var(--pdp-radius-lg);
+  border:1px solid var(--pdp-border);background:var(--pdp-card);box-shadow:var(--pdp-shadow-md)
+}
+.pdp-title{margin:0;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.1rem);font-weight:800;line-height:1.2}
+.pdp-usps .pdp-usp{padding:.35rem .7rem;border:1px solid var(--pdp-border);border-radius:999px;background:#fff;font-size:.9rem}
+
+/* ----------------------------------- status --------------------------------- */
+.pdp-status{position:relative;z-index:2;min-height:1.25rem;margin:.25rem 0 .6rem;font-size:.95rem;opacity:.86}
+
+/* -------------------------------- main grid --------------------------------- */
+.pdp-root{position:relative;z-index:2}
+.pdp-grid{
+  display:grid;
+  grid-template-columns:minmax(320px,560px) minmax(340px,1fr);
+  gap: var(--pdp-gap-y) var(--pdp-gap-x);
+  align-items:start;
+}
+@media (max-width:980px){.pdp-grid{grid-template-columns:1fr}}
+
+/* ----------------------------------- cards ---------------------------------- */
+.pdp-card{
+  padding:1rem 1.15rem;
+  margin:0 0 var(--pdp-gap-y);
+  border-radius:var(--pdp-radius-lg);
+  border:1px solid var(--pdp-border);
+  background:var(--pdp-card);
+  box-shadow:var(--pdp-shadow-lg);
+}
+
+/* ------------------------------- column stacks ------------------------------ */
+.pdp-col-left  { display:flex; flex-direction:column; gap:.7rem; }   /* tighter: gallery ↔ buy */
+.pdp-col-right { display:flex; flex-direction:column; gap:1.15rem; } /* more air on the right */
+
+/* -------------------------- sticky behavior (opt-in) ------------------------- */
+@media (min-width:981px){
+  .pdp-buy--left  { position:sticky; top:var(--pdp-sticky-top); z-index:2; }
+  .pdp-col-right .pdp-buy--right { position:sticky; top:var(--pdp-sticky-top); z-index:2; }
+}
+@media (max-width:980px){
+  .pdp-buy--left,
+  .pdp-col-right .pdp-buy--right { position:static; }
+}
+
+/* ---------------------------------- gallery --------------------------------- */
+.pdp-media-hero{width:100%;aspect-ratio:1/1;max-height:560px;object-fit:contain;border-radius:var(--pdp-radius-lg);border:1px solid var(--pdp-border);background:#fff}
+.pdp-thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:.5rem;margin-top:.55rem}
+.pdp-thumbs img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:var(--pdp-radius-md);border:1px solid var(--pdp-border);background:#fff;cursor:pointer;opacity:.92;transition:opacity .15s ease}
+.pdp-thumbs img:hover,.pdp-thumbs img[aria-current="true"]{opacity:1}
+
+/* -------------------------------- buy column -------------------------------- */
+.pdp-price{font-size:1.25rem;font-weight:800;margin:.25rem 0 .5rem;color:var(--pdp-price-color)}
+.pdp-variant{max-width:520px;border-radius:var(--pdp-radius-md)}
+.pdp-qty{width:92px}
+.pdp-cta-row{display:flex;gap:.6rem;margin-top:.65rem;flex-wrap:wrap}
+.pdp-cta-row .btn{height:44px;border-radius:var(--pdp-radius-md)}
+.pdp-trust{
+  display:flex;gap:.75rem;flex-wrap:wrap;
+  padding-top:.7rem;margin-top:.7rem;
+  border-top:1px dashed var(--pdp-border);
+  font-size:.9rem;opacity:.9
+}
+.pdp-trust i{margin-right:.35rem}
+
+/* ------------------------------- description -------------------------------- */
+.pdp-desc-top .pdp-section-title{font-size:1.05rem;font-weight:800;margin:0 0 .5rem}
+.pdp-desc-top article{
+  line-height:1.55;background:#fff;border:1px solid var(--pdp-border);
+  border-radius:var(--pdp-radius-md);padding:.75rem .9rem
+}
+.pdp-desc-top article > * + *{ margin-top:.9rem; }
+.pdp-desc-top article ul{padding-left:1.25rem}
+.pdp-desc-top article li{margin:.2rem 0}
+
+/* ---------------------------------- inputs ---------------------------------- */
+.pdp-page input[type="text"],.pdp-page input[type="search"],.pdp-page select,.pdp-page textarea{border-radius:var(--pdp-radius-md)}
+
+/* -------------------------------- skeletons --------------------------------- */
+.skeleton-block{aspect-ratio:1/1;border-radius:var(--pdp-radius-lg);border:1px solid var(--pdp-border);background:#fff}
+.skeleton-chip{height:72px;border-radius:var(--pdp-radius-md);border:1px solid var(--pdp-border);background:#fff}
+.skeleton-text{height:1.2rem;border-radius:6px;background:#fff;margin:.4rem 0}
+
+/* ------------- graceful fallback when blur isn't supported ------------------ */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+  .pdp-plate--1{background:rgba(255,255,255,.50)}
+  .pdp-plate--2{background:rgba(255,255,255,.60)}
+  .pdp-plate--3{background:rgba(255,255,255,.70)}
+}
+
+/* ========================= PDP Accent Pops (sun + sky) ====================== */
+.pdp-page{
+  /* warm + sky from site tokens with fallbacks */
+  --pdp-accent: var(--accent-orange, #ff9a1a);
+  --pdp-sky:    var(--brand-blue,  #0b74ff);
+
+  /* fallbacks if color-mix unsupported */
+  --pdp-accent-strong: #ff9a1a;
+  --pdp-accent-soft:   rgba(255,154,26,.22);
+  --pdp-sky-strong:    #0b74ff;
+  --pdp-sky-soft:      rgba(11,116,255,.22);
+}
+@supports (color-mix(in srgb, red, white)) {
+  .pdp-page{
+    --pdp-accent-strong: color-mix(in srgb, var(--pdp-accent) 92%, black);
+    --pdp-accent-soft:   color-mix(in srgb, var(--pdp-accent) 22%, transparent);
+    --pdp-sky-strong:    color-mix(in srgb, var(--pdp-sky) 92%, black);
+    --pdp-sky-soft:      color-mix(in srgb, var(--pdp-sky) 22%, transparent);
+  }
+}
+
+/* (Underline beneath title intentionally removed) */
+
+/* header rails: blue on top, warm on bottom */
+.pdp-head-card::before,
+.pdp-head-card::after{
+  content:""; position:absolute; left:12px; right:12px; height:6px; border-radius:8px; pointer-events:none;
+}
+.pdp-head-card::after{ top:8px;    background: linear-gradient(90deg, var(--pdp-sky-soft), transparent 70%); }
+.pdp-head-card::before { bottom:8px; background: linear-gradient(90deg, transparent, var(--pdp-accent-soft) 70%); }
+
+/* CTA buttons – add to cart = warm, wishlist = sky */
+.pdp-cta-row .btn-primary{
+  --bs-btn-bg: var(--pdp-accent);
+  --bs-btn-border-color: var(--pdp-accent);
+  --bs-btn-hover-bg: var(--pdp-accent-strong);
+  --bs-btn-hover-border-color: var(--pdp-accent-strong);
+  --bs-btn-active-bg: var(--pdp-accent-strong);
+  --bs-btn-active-border-color: var(--pdp-accent-strong);
+}
+.pdp-cta-row .btn-outline-secondary{
+  --bs-btn-color: var(--pdp-sky);
+  --bs-btn-border-color: var(--pdp-sky);
+  --bs-btn-hover-bg: var(--pdp-sky-strong);
+  --bs-btn-hover-border-color: var(--pdp-sky-strong);
+  --bs-btn-hover-color: #fff;
+}
+
+/* thumbs: blue primary ring + warm outer glow */
+.pdp-thumbs img[aria-current="true"],
+.pdp-thumbs img:focus-visible{
+  border-color: var(--pdp-sky);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--pdp-sky-soft), 0 0 0 6px var(--pdp-accent-soft);
+}
+
+/* trust row: warm divider, alternate icon tints */
+.pdp-trust{ border-top: 1px dashed var(--pdp-accent-soft); }
+.pdp-trust span:nth-child(odd)  i{ color: var(--pdp-accent); }
+.pdp-trust span:nth-child(even) i{ color: var(--pdp-sky); }
+
+/* description bullets: alternate warm/sky for rhythm */
+#pdp-desc-html ul li::marker{ color: var(--pdp-accent); }
+#pdp-desc-html ul li:nth-child(even)::marker{ color: var(--pdp-sky); }
+
+/* sticky buy: faint top inset accent */
+.pdp-buy,
+.pdp-buy--left{
+  box-shadow: var(--pdp-shadow-lg), 0 -3px 0 0 var(--pdp-accent-soft) inset;
+}
+
+/* USPS chips: subtle blue focus/hover hint */
+.pdp-usps .pdp-usp:hover{
+  border-color: var(--pdp-sky);
+  box-shadow: 0 0 0 3px var(--pdp-sky-soft) inset;
+}

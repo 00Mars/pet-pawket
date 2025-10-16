@@ -1,0 +1,22 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "plugins": ["@stylistic/stylelint-plugin"],
+  "rules": {
+    "no-descending-specificity": true,
+    "declaration-block-no-duplicate-properties": true,
+    "property-no-unknown": true,
+    "keyframes-name-pattern": "kebab-case",
+    "media-feature-name-no-vendor-prefix": true,
+    "property-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true,
+    "selector-id-pattern": [
+      "^[A-Za-z][A-Za-z0-9_-]*$",
+      { "message": "IDs may be camelCase, PascalCase, _, or - while migrating." }
+    ],
+
+    "selector-max-id": 2,
+    "selector-max-universal": 1,
+
+    "stylistic/declaration-block-single-line-max-declarations": 1
+  }
+}

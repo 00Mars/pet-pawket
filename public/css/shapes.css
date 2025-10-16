@@ -1,0 +1,22 @@
+.shapes-container {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .floating-shape {
+    position: absolute;
+    z-index: 0;
+    width: 48px;
+    height: 48px;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    pointer-events: none;
+  }
+
+  .floating-shape.visible {
+    opacity: 1;
+  }
+  

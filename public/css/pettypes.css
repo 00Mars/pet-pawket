@@ -1,0 +1,105 @@
+/* /css/pettypes.css — chip-based “Shop by” picker with glass background */
+
+/* Tokens */
+:root {
+  --sb-glass-bg: rgb(255 255 255 / 55%);
+  --sb-glass-border: rgb(255 255 255 / 35%);
+  --sb-accent: rgb(13 110 253 / 28%); /* tiny translucent blue top border */
+  --sb-muted: #6b7280;
+  --sb-chip-bg: rgb(255 255 255 / 90%);
+  --sb-chip-border: rgb(0 0 0 / 8%);
+  --sb-chip-active: rgb(13 110 253 / 12%);
+  --sb-chip-active-border: rgb(13 110 253 / 35%);
+}
+
+/* Section container */
+.pp-shopby {
+  position: relative;
+  z-index: 30;
+  padding: 1.25rem 0;
+  background: var(--sb-glass-bg);
+  border-top: 1px solid var(--sb-accent);       /* translucent blue edge */
+  border-bottom: 1px solid var(--sb-glass-border);
+  backdrop-filter: blur(12px) saturate(120%);
+}
+
+/* Header */
+.pp-shopby-head {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  margin-bottom: .6rem;
+}
+
+.pp-shopby-title {
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+.pp-shopby-sub {
+  font-size: .9rem;
+  color: var(--sb-muted);
+}
+
+/* Horizontal chip rail */
+.pp-chip-rail {
+  position: relative;
+}
+
+.pp-chip-scroll {
+  display: grid;
+  overflow-x: auto;
+  grid-auto-columns: max-content;
+  grid-auto-flow: column;
+  gap: .6rem;
+  padding: .25rem 0 .25rem .25rem;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.pp-chip-scroll::-webkit-scrollbar { height: 8px; }
+.pp-chip-scroll::-webkit-scrollbar-thumb { border-radius: 999px; background: rgb(0 0 0 / 10%); }
+
+/* Chip */
+.pp-chip {
+  display: inline-flex;
+  gap: .45rem;
+  align-items: center;
+  padding: .5rem .75rem;
+  border: 1px solid var(--sb-chip-border);
+  border-radius: 999px;
+  font-size: .92rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #111827;
+  background: var(--sb-chip-bg);
+  transition: transform .06s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+  cursor: pointer;
+  user-select: none;
+  scroll-snap-align: start;
+}
+.pp-chip:hover { transform: translateY(-1px); }
+
+.pp-chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(13 110 253 / 25%);
+}
+
+.pp-chip[data-active="true"] {
+  border-color: var(--sb-chip-active-border);
+  background: var(--sb-chip-active);
+}
+
+/* Icon */
+.pp-chip i {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+/* Visually hidden radio (for a11y) */
+.pp-chip input[type="radio"] {
+  position: absolute;
+  width: 0; height: 0;
+  opacity: 0;
+  pointer-events: none;
+}

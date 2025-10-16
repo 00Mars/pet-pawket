@@ -1,0 +1,109 @@
+.footer-section {
+    height: auto;
+    padding: 10px 30px 40px;
+    border-radius: 24px 24px 0 0;
+    font-family: Fredoka, sans-serif;
+    background-color: rgb(255 248 240 / 65%);
+    box-shadow: 0 -6px 25px rgb(0 0 0 / 5%);
+    border-top: 5px solid #FFA625;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-logo-col {
+    display: flex;
+    flex: 1 1 220px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer-logo-large {
+    max-width: 100%;
+    height: 200px;
+    filter: drop-shadow(2px 4px 10px rgb(0 0 0 / 50%));
+  }
+  
+  .footer-brand {
+    flex: 1 1 220px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #332D29;
+  }
+  
+  .footer-brand h4 {
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #332D29;
+  }
+  
+  .footer-links,
+  .footer-social {
+    flex: 1 1 180px;
+  }
+  
+  .footer-links h4,
+  .footer-social h4 {
+    margin-bottom: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #332D29;
+    
+  }
+  
+  .footer-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .footer-links li {
+    margin-bottom: 12px;
+  }
+  
+  .footer-links a {
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #332D29;
+    transition: color 0.2s ease;
+  }
+  
+  .footer-links a:hover {
+    color: #FFA625;
+  }
+  
+  .social-icons a {
+    display: inline-block;
+    margin-right: 14px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+  
+  .social-icons img {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(2px 4px 10px rgb(0 0 0 / 20%));
+  }
+  
+  .social-icons a:hover {
+    transform: scale(1.1);
+    filter: none;
+  }
+  
+  .footer-bottom {
+    margin-top: 50px;
+    padding-top: 25px;
+    font-size: 15px;
+    text-align: center;
+    color: #888;
+    border-top: 1px solid #ddd;
+  }
+  

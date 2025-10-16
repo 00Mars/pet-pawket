@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+public/vendor/
+**/*.min.css
+**/*.bundle.css
+**/*legacy*.css
+**/legacy/**
+**/public - Copy/**
