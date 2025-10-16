@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // middleware/requireAuth.js
 // Shopify Storefront cookie auth (no Clerk). Resilient to network timeouts.
 // Exports: softSession (non-blocking), requireAuth (blocking)
@@ -304,22 +303,3 @@ function briefError(err) {
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 export default { softSession, requireAuth };
-=======
-import { verifyToken } from '../utils/auth.js';
-
-export function requireAuth(req, res, next) {
-  const authHeader = req.headers.authorization || '';
-  const token = authHeader.split(' ')[1];
-
-  if (!token) return res.status(401).json({ error: 'Missing token' });
-
-  try {
-    const decoded = verifyToken(token); // <== must succeed
-    req.user = decoded;
-    next();
-  } catch (err) {
-    console.error("[auth] Invalid token:", err.message);
-    return res.status(401).json({ error: 'Invalid token' });
-  }
-}
->>>>>>> c2470ba (Initial real commit)

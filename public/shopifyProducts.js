@@ -387,7 +387,6 @@ export function removeFromWishlist(handle) {
   const list = getWishlist().filter(h => h !== handle);
   localStorage.setItem("wishlist", JSON.stringify(list));
 }
-<<<<<<< HEAD
 
 function setupHoverImageSwitching() {
   document.querySelectorAll('.product-card').forEach(card => {
@@ -405,5 +404,3 @@ function setupHoverImageSwitching() {
     }
   });
 }
-=======
->>>>>>> c2470ba (Initial real commit)

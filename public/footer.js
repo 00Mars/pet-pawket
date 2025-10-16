@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // public/footer.js
 console.debug('[footer] module loaded');
 
@@ -30,14 +29,3 @@ export async function injectFooter() {
     console.error('[footer] injection failed:', e);
   }
 }
-=======
-export function injectFooter() {
-    fetch('footer.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('footer-container').innerHTML = data;
-        console.log("[Fetch] footer.html fetched and injected.");
-      });
-  }
-  
->>>>>>> c2470ba (Initial real commit)

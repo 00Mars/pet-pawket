@@ -7,6 +7,7 @@ export const api = (() => {
     try { body = await res.json(); } catch {}
     return { ok: res.ok, status: res.status, body };
   };
+
   const get  = (url) => fetch(url, { credentials: 'include' }).then(j);
   const send = (url, method, data) =>
     fetch(url, {
@@ -45,11 +46,8 @@ export const api = (() => {
   }
   // *** Missing before: used by /public/wishlist.js ***
   async function productByHandle(handle) {
-    const raw = String(handle || '').trim();
-    if (!raw || raw.length > 200 || !/^[A-Za-z0-9][A-Za-z0-9/_-]{0,199}$/.test(raw)) {
-      return { ok: false, product: null, status: 400 };
-    }
-    const h = raw;
+    const h = String(handle || '').trim();
+    if (!h) return { ok: false, product: null, status: 400 };
     const r = await get(`/api/products/handle/${encodeURIComponent(h)}`);
     return { ok: r.ok, product: r.body?.product || null, status: r.status };
   }
@@ -67,19 +65,19 @@ export const api = (() => {
   /* ---------- Pane Prefs (server if present; else localStorage) ---------- */
   const LS_PANE = 'pp.myPetsPane.on';
   async function prefsGetForMyPets() {
-    try {
-      const raw = localStorage.getItem(LS_PANE);
-      return { ok: true, on: raw === '1' };
-    } catch {
-      return { ok: true, on: false };
-    }
+    const tryApi = await get('/api/prefs/forMyPets'); // may 404 → fallback
+    if (tryApi.ok) return { ok: true, on: !!tryApi.body?.on };
+    const raw = localStorage.getItem(LS_PANE);
+    return { ok: true, on: raw === null ? false : raw === '1' };
   }
   async function prefsSetForMyPets(on) {
-    try { localStorage.setItem(LS_PANE, on ? '1' : '0'); } catch {}
+    const tryApi = await send('/api/prefs/forMyPets', 'POST', { on });
+    if (tryApi.ok) return { ok: true };
+    localStorage.setItem(LS_PANE, on ? '1' : '0');
     return { ok: true };
   }
 
-/* ---------- Subscriptions (optional) ---------- */
+  /* ---------- Subscriptions (optional) ---------- */
   async function subsSuggest(petId) {
     const urls = [
       `/api/subscriptions/suggest?pet=${encodeURIComponent(petId || '')}`,

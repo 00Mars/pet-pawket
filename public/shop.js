@@ -1,4 +1,12 @@
-/* /public/shop.js */
+/* /public/shop.js — upgraded (chunked render, event delegation, zero-HTML change)
+ *
+ * Shop page — normal filters + optional "For My Pets" mode.
+ * - Normal category/search/sort/items-per-page remain unchanged.
+ * - "For My Pets" adds a guidance & recommendations pane above the grid.
+ * - Optionally boosts ranking for products matching pets (toggleable flag).
+ * - Decoupled Subscribe flow remains (modal + event).
+ * - Compact, surgical upgrades only — no HTML restructure required.
+ */
 
 import { productCardHTML, productSkeletonHTML } from './components/productCard.js';
 import { PetsBus } from './petsEvents.js';

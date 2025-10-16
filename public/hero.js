@@ -3,11 +3,7 @@
 const slidesData = [
   {
     layout: "split-left",
-<<<<<<< HEAD
     background: "/assets/images/HeroBG1.svg",
-=======
-    background: "/images/HeroBG1.svg",
->>>>>>> c2470ba (Initial real commit)
     headline: "Where Every Pet Story Begins Again",
     subtext: "From rescue to revival — shop with heart, play with purpose.",
     button: { text: "Discover the Journey", link: "#", visible: true },

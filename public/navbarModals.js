@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 // navbarModals.js
 
-=======
->>>>>>> c2470ba (Initial real commit)
 export function attachNavbarModals() {
   const modals = {
     login: document.getElementById("loginModal"),
@@ -22,7 +19,6 @@ export function attachNavbarModals() {
     setTimeout(() => modal.classList.add("hidden"), 250);
   }
 
-<<<<<<< HEAD
   // Toggle modal open
   document.querySelectorAll('[data-toggle="login-modal"]').forEach(btn =>
     btn.addEventListener("click", e => {
@@ -53,40 +49,6 @@ export function attachNavbarModals() {
   document.querySelectorAll('[data-close="signupModal"]').forEach(btn =>
     btn.addEventListener("click", () => hideModal(modals.signup))
   );
-=======
-  document.querySelectorAll('[data-toggle="login-modal"]').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      showModal(modals.login);
-    });
-  });
-
-  document.querySelectorAll('[data-close="loginModal"]').forEach(btn => {
-    btn.addEventListener('click', () => hideModal(modals.login));
-  });
-
-  document.querySelectorAll('[data-toggle="order-tracker-modal"]').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      showModal(modals.tracker);
-    });
-  });
-
-  document.querySelectorAll('[data-close="orderTrackerModal"]').forEach(btn => {
-    btn.addEventListener('click', () => hideModal(modals.tracker));
-  });
-
-  document.querySelectorAll('[data-toggle="signup-modal"]').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      showModal(modals.signup);
-    });
-  });
-
-  document.querySelectorAll('[data-close="signupModal"]').forEach(btn => {
-    btn.addEventListener('click', () => hideModal(modals.signup));
-  });
->>>>>>> c2470ba (Initial real commit)
 
   // ESC key closes all modals
   document.addEventListener("keydown", e => {
@@ -95,22 +57,14 @@ export function attachNavbarModals() {
     }
   });
 
-<<<<<<< HEAD
   // Click outside modal content closes modal
-=======
-  // Click outside modal-content to close
->>>>>>> c2470ba (Initial real commit)
   Object.values(modals).forEach(modal => {
     modal?.addEventListener("click", e => {
       if (e.target === modal) hideModal(modal);
     });
   });
 
-<<<<<<< HEAD
   // Optional mobile swipe down to close
-=======
-  // Optional: mobile swipe down to close (basic)
->>>>>>> c2470ba (Initial real commit)
   Object.values(modals).forEach(modal => {
     let startY = 0;
     modal?.addEventListener("touchstart", e => {
@@ -122,17 +76,9 @@ export function attachNavbarModals() {
     });
   });
 
-<<<<<<< HEAD
   // Order tracker form redirect
-=======
->>>>>>> c2470ba (Initial real commit)
   document.getElementById("orderTrackerForm")?.addEventListener("submit", e => {
     e.preventDefault();
     window.location.href = "/tools/order-tracker";
   });
-<<<<<<< HEAD
-=======
-
-  
->>>>>>> c2470ba (Initial real commit)
 }

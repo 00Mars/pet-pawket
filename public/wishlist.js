@@ -1,5 +1,5 @@
 /* /public/wishlist.js — multi-page renderer (robust mounts + auth/empty + IO-safe swaps)
-   Change: render exactly handles.length skeletons (no extra placeholders) and sanitize product handles. */
+   Change: render exactly handles.length skeletons (no extra placeholders). */
 
 import { PetsBus } from '/petsEvents.js';
 import { api as maybeApi } from '/api.js';
@@ -56,16 +56,10 @@ const api = {
     return { ok: r.ok, status: r.status };
   },
   async productByHandle(handle) {
-      // Strict sanitize handle before fetching
-      const raw = String(handle || '').trim();
-      if (!raw || raw.length > 200 || !/^[A-Za-z0-9][A-Za-z0-9/_-]{0,199}$/.test(raw)) {
-        throw new Error('Invalid product handle');
-      }
-      const h = raw;
-      const r = await fetch(`/api/products/handle/${encodeURIComponent(h)}`, { credentials: 'include' });
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      const j = await r.json();
-      return j?.product || j; // unwrap { product }
+    const r = await fetch(`/api/products/handle/${encodeURIComponent(handle)}`, { credentials: 'include' });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const j = await r.json();
+    return j?.product || j; // unwrap { product }
   }
 };
 
@@ -74,7 +68,7 @@ const TTL_MS = 5 * 60 * 1000;
 function getCached(h) { const hit = cache.get(h); if (!hit) return null; if (Date.now() - hit.t > TTL_MS) { cache.delete(h); return null; } return hit.product; }
 function setCached(h, p) { cache.set(h, { t: Date.now(), product: p }); }
 
-function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function priceUSD(p){const n=Number(p?.variants?.[0]?.price ?? p?.priceRange?.minVariantPrice?.amount ?? p?.price ?? NaN);return Number.isFinite(n)?`$${n.toFixed(2)}`:'';}
 function imgUrl(p){return p?.image?.src || p?.featuredImage?.url || p?.images?.[0]?.src || p?.images?.[0]?.url || ''; }
 
@@ -133,7 +127,7 @@ function wireCardActions(root){
 }
 
 async function hydrateHandles(handles, gridEl){
-  // render exactly as many skeletons as there are handles (no extras)
+  // [pp:change] render exactly as many skeletons as there are handles (no extras)
   const count = handles.length;
   gridEl.innerHTML = Array.from({length: count}).map((_,i)=>skeletonSlot(i)).join('');
 
@@ -197,15 +191,10 @@ async function renderInto(root){
     const res=await api.wishlistList();
     if (res && res.status===401){ grid.innerHTML=authState(); return; }
 
-    const rawHandles = Array.isArray(res) ? res
+    const handles = Array.isArray(res) ? res
                   : Array.isArray(res?.items) ? res.items
                   : Array.isArray(res?.wishlist) ? res.wishlist
                   : [];
-    // filter invalid handles
-    const handles = (rawHandles || []).filter(h => {
-      const s = String(h || '').trim();
-      return /^[A-Za-z0-9/_-]{1,200}$/.test(s);
-    });
     if (handles.length===0){ grid.innerHTML=emptyState(); return; }
 
     await hydrateHandles(handles, grid);

@@ -2,46 +2,44 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   z-index: 1050;
+  width: 100%;
   background: transparent;
 }
 
 .announcement-bar {
-  background: linear-gradient(120deg, rgba(0,0,0,0.85), rgba(27,27,27,0.85));
-  -webkit-backdrop-filter: blur(1px);
-  backdrop-filter: blur(1px);
-  color: white;
   padding: 10px;
-  text-align: center;
-  font-weight: 500;
   font-size: 1rem;
-  border-top: 2px solid rgba(255,255,255,0.5);
+  font-weight: 500;
+  text-align: center;
+  color: white;
+  background: linear-gradient(120deg, rgb(0 0 0 / 85%), rgb(27 27 27 / 85%));
+  backdrop-filter: blur(1px);
+  border-top: 2px solid rgb(255 255 255 / 50%);
 }
 
 .custom-navbar {
-  background: linear-gradient(120deg, rgba(0,130,179,0.95), rgba(0,198,215,0.95));
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  height: 80px;
-  padding-top: 40px;
-  border-top: 2px solid rgba(255,255,255,0.05);
-  border-bottom: 2px solid rgba(0,0,0,0.05);
+  position: relative;
   display: block;
   width: 100%;
-  position: relative;
+  height: 80px;
+  padding-top: 40px;
+  background: linear-gradient(120deg, rgb(0 130 179 / 95%), rgb(0 198 215 / 95%));
+  backdrop-filter: blur(6px);
+  border-top: 2px solid rgb(255 255 255 / 5%);
+  border-bottom: 2px solid rgb(0 0 0 / 5%);
 }
 
 .navbar-container {
-  max-width: 1600px;
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 1rem;
-  position: relative;
-  width: 100%;
 }
 
 .nav-left,
@@ -54,6 +52,7 @@
 
 .nav-left { left: 2rem; }
 .nav-center { left: 50%; transform: translate(-50%, -50%); text-align: center; }
+
 .nav-right {
   right: 1rem;
   display: flex;
@@ -62,18 +61,18 @@
 
 .brand-area {
   display: inline-flex;
-  align-items: center;
   gap: clamp(4px, 1vw, 10px);
+  align-items: center;
   white-space: nowrap;
 }
 
 .brand-logo {
   font-size: 2.5rem;
   font-weight: 700;
-  color: white;
-  filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.5));
-  text-decoration: none;
   letter-spacing: 0.03em;
+  text-decoration: none;
+  color: white;
+  filter: drop-shadow(2px 4px 10px rgb(0 0 0 / 50%));
 }
 
 
@@ -81,47 +80,47 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 2;
   width: 60px;
   height: auto;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(2px 4px 10px rgb(0 0 0 / 50%));
   transition: transform 0.3s ease;
+  transform: translate(-50%, -50%);
 }
 
 .charlie-frame-wrapper {
   position: relative;
-  width: 80px;
-  height: 80px;
   display: inline-block;
   flex-shrink: 0;
+  width: 80px;
+  height: 80px;
 }
 
 .charlie-frame {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
   width: 100%;
   height: auto;
-  z-index: 1;
   pointer-events: none;
 }
 
 
 .nav-links {
-  list-style: none;
   display: flex;
-  align-items: center;
   gap: clamp(0.2rem, 0.8vw, 3rem);
+  align-items: center;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .nav-item a {
-  color: white;
+  padding: 0.5rem 0;
   font-weight: 600;
   text-decoration: none;
-  padding: 0.5rem 0;
+  color: white;
 }
 
 .nav-item:hover .dropdown-menu {
@@ -129,12 +128,12 @@
 }
 
 .dropdown-menu {
-  display: none;
   position: absolute;
-  background: rgba(255,255,255,0.95);
-  border-radius: 6px;
-  padding: 10px;
+  display: none;
   margin-top: 8px;
+  padding: 10px;
+  border-radius: 6px;
+  background: rgb(255 255 255 / 95%);
 }
 
 .dropdown-menu a {
@@ -146,16 +145,16 @@
 .icon {
   font-size: 1.8rem;
   color: white;
-  cursor: pointer;
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .cart-count {
-  background: #007acc;
-  color: white;
   padding: 0.5rem;
   border-radius: 12px;
   font-weight: 700;
+  color: white;
+  background: #007acc;
 }
 
 .icon-dropdown {
@@ -168,25 +167,25 @@
 }
 
 .icon-dropdown-menu {
-  display: none;
   position: absolute;
-  right: 0;
   top: 100%;
-  background: rgba(255,255,255,0.95);
-  border-radius: 6px;
-  padding: 10px;
-  box-shadow: 0px 2px 8px rgba(0,0,0,0.15);
+  right: 0;
   z-index: 100;
+  display: none;
+  padding: 10px;
+  border-radius: 6px;
+  background: rgb(255 255 255 / 95%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
 }
 
 .icon-dropdown-menu a {
   display: block;
   padding: 8px;
-  color: #333;
-  text-decoration: none;
   font-weight: 500;
+  text-decoration: none;
+  color: #333;
 }
 
 .icon-dropdown-menu a:hover {
-  background: rgba(0, 130, 179, 0.1);
+  background: rgb(0 130 179 / 10%);
 }

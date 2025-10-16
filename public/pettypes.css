@@ -27,6 +27,8 @@
   .shopby-header-toggle {
     width: 100%;
     cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     user-select: none;
     z-index: 10;
     position: relative;
@@ -38,6 +40,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
     border-top: 6px solid rgba(255, 194, 124, 0.85);
     border-bottom: 2px solid rgba(255, 169, 77, 0.4);
+    -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
   }
   

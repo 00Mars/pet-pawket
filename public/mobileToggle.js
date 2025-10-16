@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // petpawket/public/mobileToggle.js
 // Toggle the mobile menu drawer open or closed. When the menu opens we
 // migrate the navigation links and icon area into the drawer. When the
@@ -7,10 +6,6 @@
 // can be imported correctly from other modules.
 export function toggleMobileMenu() {
   const menu = document.getElementById('mobile-menu');
-=======
-export function toggleMobileMenu() {
-  const menu = document.getElementById('mobileMenu');
->>>>>>> c2470ba (Initial real commit)
   const mobileContent = menu?.querySelector('.mobile-content');
   const navLinks = document.querySelector('.nav-links');
   const iconArea = document.querySelector('.icon-area');
