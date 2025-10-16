@@ -1,0 +1,80 @@
+<!-- category.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop by Category | Pet Pawket</title>
+  <link rel="stylesheet" href="/theme.css" />
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <main class="container py-4">
+
+    <!-- Breadcrumbs -->
+    <nav id="breadcrumb" class="mb-3 text-muted text-sm"></nav>
+
+    <!-- Category Title -->
+    <h1 id="category-title" class="mb-4 fw-bold"></h1>
+
+    <!-- Banner Slot -->
+    <div id="category-banner" class="mb-4"></div>
+
+    <!-- Filters + Controls -->
+    <div id="filter-controls" class="filter-drawer">
+      <form id="filter-form">
+        <div>
+          <label class="filter-label">Tags</label>
+          <details class="tag-filter-dropdown">
+  <summary class="filter-label">Filter by Tags</summary>
+  <div id="tag-filters" class="filter-group scrollable-tags"></div>
+</details>
+
+        </div>
+
+        <div>
+          <label class="filter-label">Availability</label>
+          <div>
+            <label><input type="checkbox" name="availability" value="in-stock" checked> In Stock Only</label>
+          </div>
+        </div>
+
+            <div>
+  <label class="filter-label">Price Range</label>
+  <div class="price-range-inputs">
+    <input type="number" id="price-min" min="0" step="0.01" value="0" />
+    <span class="price-separator">–</span>
+    <input type="number" id="price-max" min="0" step="0.01" value="100" />
+  </div>
+</div>
+
+        <!-- Mood and Pet Profile placeholders -->
+        <div id="mood-filter"></div>
+        <div id="pet-profile-filter"></div>
+      </form>
+    </div>
+
+    <!-- Sort & Search -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <select id="sort-options" class="form-select w-auto">
+        <option value="price-asc">Price (Low → High)</option>
+        <option value="price-desc">Price (High → Low)</option>
+        <option value="newest">Newest</option>
+        <option value="best-match">Best Match</option>
+      </select>
+
+      <input type="text" id="search-input" class="form-control ms-2" placeholder="Search this category..." style="max-width: 250px;" />
+    </div>
+
+    <!-- Products -->
+    <div id="category-products" class="row g-4"></div>
+
+    <!-- Empty State -->
+    <p id="empty-state" class="text-center text-muted mt-5" style="display: none;">No products match your filters.</p>
+  </main>
+
+  <script type="module" src="shopifyProducts.js"></script>
+  <script type="module" src="categoryPage.js"></script>
+</body>
+</html>

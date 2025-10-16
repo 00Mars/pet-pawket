@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // /public/dropdownToggles.js
 // Keep legacy UX without fighting Bootstrap.
 // - If a trigger uses [data-bs-toggle="dropdown"] or .dropdown-toggle and Bootstrap is present,
@@ -16,6 +17,10 @@ export function setupDropdownToggles() {
   try { window.__ppDropdownDebug?.push('dropdownToggles.init', { HAS_BS }); } catch {}
 
   const navDropdowns  = document.querySelectorAll('.nav-item.dropdown');
+=======
+export function setupDropdownToggles() {
+  const navDropdowns = document.querySelectorAll('.nav-item.dropdown');
+>>>>>>> c2470ba (Initial real commit)
   const iconDropdowns = document.querySelectorAll('.icon-dropdown');
 
   function closeAllDropdowns(except = null) {
@@ -23,6 +28,7 @@ export function setupDropdownToggles() {
     [...navDropdowns, ...iconDropdowns].forEach(d => {
       if (d !== except) d.classList.remove('active');
     });
+<<<<<<< HEAD
     // NOTE: we do NOT strip .show here; Bootstrap will handle its own menus.
   }
 
@@ -114,4 +120,31 @@ export function setupDropdownToggles() {
       } catch (ex) { console.error('[dropdownToggles] closer error', ex); }
     });
   });
+=======
+  }
+
+  navDropdowns.forEach(dropdown => {
+    const trigger = dropdown.querySelector('a');
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const isActive = dropdown.classList.contains('active');
+      closeAllDropdowns();
+      if (!isActive) dropdown.classList.add('active');
+    });
+  });
+
+  iconDropdowns.forEach(dropdown => {
+    dropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isActive = dropdown.classList.contains('active');
+      closeAllDropdowns();
+      if (!isActive) dropdown.classList.add('active');
+    });
+  });
+
+  document.addEventListener('click', () => {
+    closeAllDropdowns();
+  });
+>>>>>>> c2470ba (Initial real commit)
 }

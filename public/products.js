@@ -97,6 +97,7 @@ export function renderProducts(products) {
   console.log("[renderProducts] Finished rendering.");
 }
 
+<<<<<<< HEAD
 export function getCartItemCount() {
   try {
     // Support multiple legacy stores: 'cart', 'cartItems', or object with .items
@@ -162,6 +163,21 @@ export function addToCart(item) {
   updateCartBadge();
 }
 
+=======
+export function updateCartBadge() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const badge = document.querySelector("#cart-count");
+
+  if (badge) {
+    badge.textContent = totalItems;
+    console.log(`[Cart] Updated badge: ${totalItems} item(s).`);
+  } else {
+    console.warn("[Cart] #cart-count not found!");
+  }
+}
+
+>>>>>>> c2470ba (Initial real commit)
 export function populateFilterOptions(categories) {
   const dropdown = document.getElementById("filter-options");
   if (!dropdown) {

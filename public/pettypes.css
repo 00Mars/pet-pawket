@@ -1,0 +1,198 @@
+/* ========== SHOPBY SECTION CONTAINER ========== */
+.shopby-section {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.85);
+    border-bottom: 2px solid rgb(255, 169, 77);
+    box-shadow: 0 8px 20px rgba(255, 169, 77, 0.1);
+    z-index: 0;
+  }
+  
+  .shopby-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.85);
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .shopby-section .container {
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* ========== HEADER TOGGLE AREA ========== */
+  .shopby-header-toggle {
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 0;
+    background-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    border-top: 6px solid rgba(255, 194, 124, 0.85);
+    border-bottom: 2px solid rgba(255, 169, 77, 0.4);
+    backdrop-filter: blur(3px);
+  }
+  
+  .shopby-header-toggle:hover {
+    background-color: rgba(255, 246, 226, 0.733);
+  }
+  
+  .shopby-header-toggle .section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: rgb(51, 51, 51);
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .shopByTitle
+   {
+
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+
+  }
+  .shopby-header-toggle .toggle-arrow {
+    margin-left: 0.75rem;
+    transition: transform 0.35s ease-in-out;
+    transform: rotate(0deg);
+    transform-origin: center;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .shopby-header-toggle .toggle-arrow.rotated {
+    transform: rotate(180deg);
+  }
+  
+  /* ========== DROPDOWN MENU ========== */
+  .shopby-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid #ffc966;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 15;
+    min-width: 220px;
+  }
+  
+  .shopby-header-toggle:hover .shopby-dropdown-menu {
+    display: block;
+  }
+  
+  .shopby-dropdown-menu a {
+    display: block;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .shopby-dropdown-menu a:hover {
+    background-color: #fff2d6;
+  }
+  
+  /* ========== GRID / FLEX LAYOUT ========== */
+  .shopby-grid-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .shopby-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 30px auto;
+    animation: shopbyFadeUp 0.4s ease-in-out;
+  }
+  
+  /* ========== INDIVIDUAL TILES ========== */
+  .pet-tile {
+    flex: 1 1 calc(25% - 30px);
+    max-width: 200px;
+    min-width: 180px;
+    background: #fff;
+    border: 2px solid rgb(255, 155, 42);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .pet-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  .pet-tile img {
+    height: 80px;
+    margin-bottom: 10px;
+  }
+  
+  .pet-tile span {
+    font-weight: 700;
+    font-size: 16px;
+    color: rgb(34, 34, 34);
+    display: block;
+  }
+  
+  /* ========== COLLAPSE BUTTON ========== */
+  .shopby-collapse-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+    color: #e67300;
+    padding: 12px 24px;
+    border: 2px solid #ffc966;
+    border-radius: 8px;
+    background-color: rgba(255, 241, 212, 0.6);
+    transition: all 0.25s ease;
+    width: max-content;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .shopby-collapse-control:hover {
+    background-color: rgba(255, 214, 150, 0.8);
+    box-shadow: 0 4px 10px rgba(255, 169, 77, 0.2);
+  }
+  
+  /* ========== COLLAPSIBLE VISIBILITY CONTROL ========== */
+  .shopby-section .collapsible-content.hidden {
+    display: none;
+  }
+  
+  /* ========== ENTRY ANIMATION ========== */
+  @keyframes shopbyFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

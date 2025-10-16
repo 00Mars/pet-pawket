@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search Results | Pet Pawket</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/globals.css" />
+  <link rel="stylesheet" href="/theme.css" />
+  <link rel="stylesheet" href="/footer.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="navbar-container"></div>
+
+  <main class="container mt-5">
+    <h2 id="search-query-header">Search Results</h2>
+    <div class="row mb-4">
+  <div class="col-lg-3">
+    <div class="mb-3">
+      <label for="searchInput" class="form-label">Search Products</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="searchInput" placeholder="e.g. leash, treats..." />
+        <button class="btn btn-outline-secondary" id="searchBtn">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="row" id="search-results-container"></div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { initBaseUI } from './baseInit.js';
+    import { allProducts, fetchAllProducts } from './products.js';
+
+    const searchParam = new URLSearchParams(window.location.search).get('q')?.toLowerCase() || '';
+    const header = document.getElementById('search-query-header');
+    const container = document.getElementById('search-results-container');
+
+    if (searchParam.length < 2) {
+      header.textContent = `Search: "${searchParam}" — Too short to search.`;
+    } else {
+      header.textContent = `Search Results for "${searchParam}"`;
+    }
+
+    function renderMatches(products) {
+      container.innerHTML = '';
+
+      if (!products.length) {
+        container.innerHTML = `<p>No matching products found for "${searchParam}".</p>`;
+        return;
+      }
+
+      products.forEach(p => {
+        const col = document.createElement("div");
+        col.className = "col-md-6 col-lg-4 mb-4";
+        col.innerHTML = `
+          <div class="card h-100 shadow-sm">
+            <img src="${p.image}" alt="${p.title}" class="card-img-top">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">${p.title}</h5>
+              <p class="card-text text-muted">$${p.price.toFixed(2)}</p>
+              <a href="/product.html?id=${encodeURIComponent(p.id)}" class="btn btn-primary mt-auto">
+                View Product
+              </a>
+            </div>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
+    async function runSearch() {
+  await fetchAllProducts();
+
+  const input = searchParam.trim();
+  const matches = input.length < 2
+    ? allProducts // ← show everything if query is blank
+    : allProducts.filter(p =>
+        p.title.toLowerCase().includes(input) ||
+        p.type.toLowerCase().includes(input)
+      );
+
+  header.textContent = input.length < 2
+    ? `All Products`
+    : `Search Results for "${input}"`;
+
+  renderMatches(matches);
+}
+
+
+    initBaseUI(runSearch);
+
+
+    
+  </script>
+</body>
+</html>

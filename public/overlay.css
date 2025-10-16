@@ -1,0 +1,37 @@
+#searchOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: none;
+}
+
+#searchOverlay .top-stack {
+  padding-top: 120px;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-box {
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#searchResults {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-results {
+  width: 100%;
+}

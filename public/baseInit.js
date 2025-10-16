@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 // petpawket/public/baseInit.js
 // baseInit.js
 import { injectNavbar } from './navbar.js';
 // Import overlay handlers and Huey animation from their dedicated modules.
 import { setupNavbarOverlayHandlers } from './navbarOverlay.js';
 import { setupHueyAnimation } from './navbarAnimation.js';
+=======
+// baseInit.js
+import {
+  injectNavbar,
+  setupHueyAnimation,
+  setupNavbarOverlayHandlers
+} from './navbar.js';
+>>>>>>> c2470ba (Initial real commit)
 
 import { injectFooter } from './footer.js';
 import { updateCartBadge } from './cartUtils.js';
@@ -56,4 +65,8 @@ export function initBaseUI(callback = () => {}) {
 
   injectFooter();
   log('Footer injection called.');
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c2470ba (Initial real commit)

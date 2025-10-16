@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // petpawket/public/mobileRelocation.js
 import { throttleLog } from './throttleLog.js';
 
@@ -6,6 +7,10 @@ import { throttleLog } from './throttleLog.js';
 // viewport width is within tablet or mobile sizes, and moves them back
 // into the desktop navbar when wider. Renamed to camelCase for proper
 // exports.
+=======
+import { throttleLog } from './throttleLog.js';
+
+>>>>>>> c2470ba (Initial real commit)
 export function setupResponsiveMobileMenu() {
   const logLayoutState = throttleLog("LayoutState", () => {
     const navLinks = document.querySelector('.nav-links');
@@ -20,7 +25,11 @@ export function setupResponsiveMobileMenu() {
   const relocateToMobile = () => {
     const navLinks = document.querySelector('.nav-links');
     const iconArea = document.querySelector('.icon-area');
+<<<<<<< HEAD
     const mobileMenu = document.getElementById('mobile-menu');
+=======
+    const mobileMenu = document.getElementById('mobileMenu');
+>>>>>>> c2470ba (Initial real commit)
     const mobileContent = mobileMenu?.querySelector('.mobile-content');
     const navLeft = document.querySelector('.nav-left');
     const navRight = document.querySelector('.nav-right');
@@ -67,7 +76,11 @@ export function setupResponsiveMobileMenu() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       const isMobileNow = window.innerWidth <= 1024;
+<<<<<<< HEAD
       const mobileMenu = document.getElementById('mobile-menu');
+=======
+      const mobileMenu = document.getElementById('mobileMenu');
+>>>>>>> c2470ba (Initial real commit)
 
       if (!isMobileNow && mobileMenu?.classList.contains('active')) {
         mobileMenu.classList.remove('active');
